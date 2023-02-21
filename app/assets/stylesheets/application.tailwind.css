@@ -1,0 +1,105 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+  .btn {
+    @apply text-white py-2 px-4 rounded cursor-pointer;
+  }
+
+  .btn-small {
+    @apply py-1 px-2 text-sm;
+  }
+
+  .btn-primary {
+    @apply bg-pink-600/70;
+  }
+
+  .btn-primary:hover {
+    @apply bg-pink-800;
+  }
+
+  .btn-blue {
+    @apply bg-blue;
+  }
+
+  .btn-blue:hover {
+    @apply bg-blue-light;
+  }
+
+  .btn-secondary {
+    @apply bg-zinc-800;
+  }
+
+  .btn-secondary:hover {
+    @apply bg-pink-600/40;
+  }
+
+  .btn-danger {
+    @apply bg-red-700/60;
+  }
+
+  .btn-danger:hover {
+    @apply bg-red-800;
+  }
+
+  .btn-link {
+    @apply text-gray-900 font-normal px-0;
+  }
+
+  .btn-link:hover {
+    @apply text-gray-600 underline;
+  }
+
+  .text-input {
+    @apply block rounded px-2 py-2 bg-white border border-zinc-300 text-gray-900 outline-none;
+  }
+
+  .text-input:focus {
+    @apply ring ring-blue-500 border-blue-100;
+  }
+
+  .divider {
+    @apply h-px bg-zinc-700;
+  }
+
+  .nav-active {
+    @apply text-pink-600;
+  }
+
+
+  .pagy-nav {
+    @apply flex justify-between items-center text-gray-700 mt-6;
+  }
+
+  .pagy-nav.pagination {
+    @apply isolate flex -space-x-px rounded-md justify-center mt-0;
+  }
+
+  .page.next a {
+    @apply relative inline-flex items-center rounded-r-md border border-gray-300 bg-white px-2 py-2 text-sm font-medium text-gray-500 hover: bg-gray-50 focus:z-20;
+  }
+
+  .page.prev a {
+    @apply relative inline-flex items-center rounded-l-md border border-gray-300 bg-white px-2 py-2 text-sm font-medium text-gray-500 hover: bg-gray-50 focus:z-20;
+  }
+
+  .page.next.disabled {
+    @apply relative inline-flex items-center rounded-r-md border border-gray-300 bg-slate-100 px-2 py-2 text-sm font-medium text-gray-500 hover: bg-gray-50 focus:z-20;
+  }
+
+  .page.prev.disabled {
+    @apply relative inline-flex items-center rounded-l-md border border-gray-300 bg-slate-100 px-2 py-2 text-sm font-medium text-gray-500 hover: bg-gray-50 focus:z-20;
+  }
+
+  .page a,
+  .page.gap {
+    @apply bg-white border-gray-300 text-gray-500 hover: bg-gray-50 relative inline-flex items-center border px-4 py-2 text-sm font-medium focus:z-20;
+  }
+
+  .page.active {
+    @apply z-10 bg-sky-50 border-sky-200 text-sky-500 relative inline-flex items-center border px-4 py-2 text-sm font-medium focus: z-20;
+  }
+}
+
+@import 'actiontext.css';
