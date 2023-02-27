@@ -5,10 +5,10 @@ export default class extends Controller {
 
 	toggle() {
 		if (this.element.classList.contains('expanded')) {
-			this.contentTarget.classList.add('h-[100px]');
+			this.contentTarget.classList.remove('h-auto');
 			this.element.classList.remove('expanded');
 		} else {
-			this.contentTarget.classList.remove('h-[100px]');
+			this.contentTarget.classList.add('h-auto');
 			this.element.classList.add('expanded');
 		}
 	}

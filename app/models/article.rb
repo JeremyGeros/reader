@@ -1,13 +1,13 @@
 class Article < ApplicationRecord
-  belongs_to :source
+  belongs_to :source, optional: true
   belongs_to :user
 
   has_one_attached :raw_html
 
   validates :url, presence: true
-  validates :name, presence: true
 
   after_commit :parse
+  after_commit :read_later_save, on: :create
 
   # Most recent scope either by coalcesed published_at or created_at
   scope :most_recent, -> { order(Arel.sql('COALESCE(articles.published_at, articles.created_at) DESC')) }
@@ -32,11 +32,24 @@ class Article < ApplicationRecord
     published_at || created_at
   end
 
+  def read_later_save
+    if source.nil?
+      raw_html.attach(
+        io: URI.open(url, "User-Agent" => "Mozilla/5.0 (iPhone; CPU iPhone OS 14_7_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) FxiOS/36.0  Mobile/15E148 Safari/605.1.15"),
+        filename: "#{id}.html"
+      )
+    end
+  end
+
   def parse
+    parse! if parse_progress_not_started?
+  end
+
+  def parse!
     return if parse_progress_in_progress?
-    if raw_html.attached? && parse_progress_not_started?
+    if raw_html.attached?
       update(parse_progress: :in_progress)
-      ParseArticleJob.perform_later(self)
+      ParseArticleJob.perform_now(self)
     end
   end
 end

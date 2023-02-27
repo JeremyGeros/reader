@@ -1,0 +1,27 @@
+<%= form_with(model: article, local: true, html: { autocomplete: "off", class: 'w-full'}) do |form| %>
+  <% if article.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(article.errors.count, "error") %> prohibited this article from being saved:</h2>
+
+      <ul>
+        <% article.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class='mb-4'>
+    <%= form.label :url %>
+    <%= form.text_field :url, class: 'text-input w-full' %>
+  </div>
+
+  <div class='flex'>
+    <%= form.submit 'Save', class: 'btn btn-primary' %>
+    <div class='flex-1'></div>
+
+    <% if article.persisted? %>
+      <%= link_to 'Delete article', article_path(article),  data: { "turbo-method": :delete, turbo_confirm: 'Are you sure you want to delete this article will also delete all articles from this article?' }, class: 'btn btn-danger' %>
+    <% end %>
+  </div>
+<% end %>

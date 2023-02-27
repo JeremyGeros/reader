@@ -28,5 +28,9 @@ class User < ApplicationRecord
 
   def admin?
     ADMIN_EMAILS.include?(email)
-  end 
+  end
+  
+  def preferred_size
+    "medium"
+  end
 end

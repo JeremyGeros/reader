@@ -1,0 +1,10 @@
+<% if @article.valid? %>
+  <h1>Saved!</h1>
+  <%= javascript_tag do %>
+    setTimeout(function() {
+      window.location.href = "<%= @article.url %>";
+    }, 5000);
+  <% end %>
+<% else %>
+
+<% end %>

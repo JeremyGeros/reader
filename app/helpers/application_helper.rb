@@ -5,8 +5,8 @@ module ApplicationHelper
     condition ? klass : ''
   end
 
-  def nav_active(controller)
-    class_if(params[:controller] == controller, 'nav-active')
+  def nav_active(controller, action = nil)
+    class_if(params[:controller] == controller && (action.nil? || params[:action] == action), 'nav-active')
   end
 
   def pretty_date_display(date)

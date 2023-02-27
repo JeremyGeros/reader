@@ -1,13 +1,13 @@
 <% articles.each do |article| %>
   <div class="article flex flex-col border-b border-gray-300 cursor-pointer hover:border-blue-400 relative group" data-controller='article-expand'>
   
-      <div class='article-header top-0 bg-white mb-2 z-10 py-2'>
-        <div class='w-[750px] mx-auto'>
+      <div class='article-header top-0 bg-white mb-2 border-b border-transparent z-10 py-2'>
+        <div class='w-[750px] mx-auto article-width <%= Current.user.preferred_size %>'>
           <div class='flex items-center'>
             <div class='flex-1'>
               <h1 class='text-xl font-bold'><%= article.name %></h1>
               <div class='flex text-gray-600'>
-                <h2 class='mr-5'><%= article.source.pretty_name %></h2>
+                <% if article.source.present? %><h2 class='mr-5'><%= article.source.pretty_name %></h2><% end %>
                 <%= pretty_date_display(article.display_date) %>
               </div>
             </div>
@@ -17,13 +17,17 @@
                   <path stroke-linecap="round" stroke-linejoin="round" d="M3 4.5h14.25M3 9h9.75M3 13.5h5.25m5.25-.75L17.25 9m0 0L21 12.75M17.25 9v12" />
                 </svg>
               </button>
+              <%= link_to 'Reparse', reparse_article_path(article), class: 'btn btn-link' %>
             </div>
           </div>
         </div>
       </div>
 
-      <div class='w-[750px] mx-auto overflow-hidden h-[100px] relative text-md ' data-article-expand-target='content'>
+      <div class='w-[750px] mx-auto overflow-hidden h-[130px] relative text-md article-width <%= Current.user.preferred_size %>' data-article-expand-target='content'>
         <%== article.extracted_content %>
+
+        <div class='absolute bottom-0 left-0 right-0 bg-gradient-to-b from-transparent to-white/80 h-4'>
+        </div>
 
         <div class='expander-overlay absolute bottom-0 left-0 right-0 bg-gradient-to-b from-transparent to-white h-3/4 hidden group-hover:block' data-action="click->article-expand#toggle">
           <button class='rounded-full text-sm border border-gray-300 top-1/2 -translate-x-1/2 relative left-1/2 bg-white px-2 py-1'>Click to expand</button>

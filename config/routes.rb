@@ -2,10 +2,16 @@ require 'sidekiq/web'
 require 'admin_constraint'
 
 Rails.application.routes.draw do
-  resources :feeds, only: [:index]
+  get '/all', to: 'feeds#all', as: 'feed_all'
+  get '/feeds', to: 'feeds#feeds', as: 'feed_feeds'
+  get '/read_later', to: 'feeds#read_later', as: 'feed_read_later'
   
-  resources :articles, only: [:index, :show]
-  
+  resources :articles, only: [:index, :show, :new, :create] do
+    member do
+      get 'reparse'
+    end
+  end
+
   resources :sources do
     member do
       get 'scan'
@@ -15,6 +21,7 @@ Rails.application.routes.draw do
   resources :notes do
   end
 
+  get 'external/read_later', to: 'external_articles#read_later', as: 'external_read_later'
 
   # Admin
   mount Sidekiq::Web => '/admin/sidekiq', :constraints => AdminConstraint.new
@@ -29,5 +36,5 @@ Rails.application.routes.draw do
   get 'logout', to: 'sessions#destroy', as: 'logout'
 
   # ROOT
-  root "feeds#index"
+  root "feeds#all"
 end

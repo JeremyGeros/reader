@@ -12,6 +12,8 @@ class ParseArticleJob < ApplicationJob
     output = output.strip
     readability = JSON.parse(output)
 
+    article.name = readability["title"].presence if article.name.blank?
+
     article.update!(
       language: readability["lang"],
       byline: readability["byline"],
