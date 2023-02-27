@@ -1,0 +1,14 @@
+<% if Current.user %>
+  <div class='flex flex-col h-screen py-3 z-10 lg:px-5 px-10 bg-gray-100 border-r border-gray-300 w-1/6'>
+    <div class='flex flex-col flex-1'>
+      <%= link_to 'Reader', root_path, class: 'font-serif font-bold text-3xl mr-8' %>
+      <%= link_to 'Sources', sources_path, class: "btn btn-link text-lg #{nav_active('sources')}" %>
+      <%= link_to 'Notes', notes_path, class: 'btn btn-link text-lg' %>
+      <%= link_to 'New source', new_source_path %>
+    </div>
+
+    <div class=''>
+      <%= link_to 'Log Out', logout_path, class: "btn btn-link" %>
+    </div>
+  </div>  
+<% end %>

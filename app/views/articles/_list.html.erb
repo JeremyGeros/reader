@@ -1,0 +1,33 @@
+<% articles.each do |article| %>
+  <div class="article flex flex-col border-b border-gray-300 cursor-pointer hover:border-blue-400 relative group" data-controller='article-expand'>
+  
+      <div class='article-header top-0 bg-white mb-2 z-10 py-2'>
+        <div class='w-[750px] mx-auto'>
+          <div class='flex items-center'>
+            <div class='flex-1'>
+              <h1 class='text-xl font-bold'><%= article.name %></h1>
+              <div class='flex text-gray-600'>
+                <h2 class='mr-5'><%= article.source.pretty_name %></h2>
+                <%= pretty_date_display(article.display_date) %>
+              </div>
+            </div>
+            <div class='article-header-buttons hidden'>
+              <button class='rounded border border-gray-300 p-1' data-action="click->article-expand#toggle">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M3 4.5h14.25M3 9h9.75M3 13.5h5.25m5.25-.75L17.25 9m0 0L21 12.75M17.25 9v12" />
+                </svg>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class='w-[750px] mx-auto overflow-hidden h-[100px] relative text-md ' data-article-expand-target='content'>
+        <%== article.extracted_content %>
+
+        <div class='expander-overlay absolute bottom-0 left-0 right-0 bg-gradient-to-b from-transparent to-white h-3/4 hidden group-hover:block' data-action="click->article-expand#toggle">
+          <button class='rounded-full text-sm border border-gray-300 top-1/2 -translate-x-1/2 relative left-1/2 bg-white px-2 py-1'>Click to expand</button>
+        </div>
+      </div>
+  </div>
+<% end %>

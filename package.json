@@ -1,0 +1,8 @@
+{
+  "dependencies": {
+    "@mozilla/readability": "^0.4.2",
+    "dompurify": "^3.0.0",
+    "jsdom": "^21.1.0",
+    "request": "^2.88.2"
+  }
+}

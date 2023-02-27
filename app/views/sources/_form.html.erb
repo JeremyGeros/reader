@@ -1,0 +1,32 @@
+<%= form_with(model: source, local: true, html: { autocomplete: "off", class: 'w-full'}) do |form| %>
+  <% if source.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(source.errors.count, "error") %> prohibited this source from being saved:</h2>
+
+      <ul>
+        <% source.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class='mb-4'>
+    <%= form.label :name %>
+    <%= form.text_field :name, class: 'text-input w-full' %>
+  </div>
+
+  <div class='mb-4'>
+    <%= form.label :url %>
+    <%= form.text_field :url, class: 'text-input w-full' %>
+  </div>
+
+  <div class='flex'>
+    <%= form.submit 'Update', class: 'btn btn-primary' %>
+    <div class='flex-1'></div>
+
+    <% if source.persisted? %>
+      <%= link_to 'Delete source', source_path(source),  data: { "turbo-method": :delete, turbo_confirm: 'Are you sure you want to delete this source will also delete all articles from this source?' }, class: 'btn btn-danger' %>
+    <% end %>
+  </div>
+<% end %>

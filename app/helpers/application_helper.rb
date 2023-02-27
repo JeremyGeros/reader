@@ -12,10 +12,10 @@ module ApplicationHelper
   def pretty_date_display(date)
     return '' unless date
 
-    if (date.year == DateTime.now.year || date.year == DateTime.now.year - 1)
-      date.strftime('%b %d')
-    else
+    # if (date.year == DateTime.now.year || date.year == DateTime.now.year - 1)
+      # date.strftime('%b %d')
+    # else
       date.strftime('%b %d, %Y')
-    end
+    # end
   end
 end

@@ -1,0 +1,15 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  url: MyString
+  user: one
+  scan_interval: 
+  last_scanned: 2023-02-21 15:26:32
+  enabled_at: 2023-02-21 15:26:32
+
+two:
+  url: MyString
+  user: two
+  scan_interval: 
+  last_scanned: 2023-02-21 15:26:32
+  enabled_at: 2023-02-21 15:26:32

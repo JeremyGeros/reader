@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_02_21_211210) do
+ActiveRecord::Schema[7.0].define(version: 2023_02_23_163243) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -52,6 +52,39 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_21_211210) do
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
 
+  create_table "articles", force: :cascade do |t|
+    t.string "url"
+    t.string "name"
+    t.text "extracted_text"
+    t.string "subtitle"
+    t.bigint "source_id", null: false
+    t.bigint "user_id", null: false
+    t.integer "read_status", default: 0, null: false
+    t.datetime "read_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "parse_progress", default: 0, null: false
+    t.string "byline"
+    t.text "extracted_content"
+    t.text "excerpt"
+    t.string "language"
+    t.datetime "published_at"
+    t.index ["source_id"], name: "index_articles_on_source_id"
+    t.index ["user_id"], name: "index_articles_on_user_id"
+  end
+
+  create_table "sources", force: :cascade do |t|
+    t.string "url", null: false
+    t.string "name", null: false
+    t.bigint "user_id", null: false
+    t.integer "scan_interval", default: 0, null: false
+    t.datetime "last_scanned"
+    t.datetime "enabled_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_sources_on_user_id"
+  end
+
   create_table "user_sessions", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.string "key", null: false
@@ -73,5 +106,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_21_211210) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "articles", "sources"
+  add_foreign_key "articles", "users"
+  add_foreign_key "sources", "users"
   add_foreign_key "user_sessions", "users"
 end

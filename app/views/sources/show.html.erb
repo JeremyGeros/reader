@@ -1,0 +1,12 @@
+<h1><%= @source.name %></h1>
+
+<div class='flex '>
+  <%= @source.url %>
+
+  <%= link_to "Edit source", edit_source_path(@source), class: 'btn btn-link' %>
+
+  <%= link_to "Scan", scan_source_path(@source), class: 'btn btn-link' %>
+</div>
+
+<h2>Articles</h2>
+<%= render 'articles/list', articles: @source.articles.most_recent.ready, readerable: true %>

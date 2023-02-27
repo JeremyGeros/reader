@@ -1,0 +1,12 @@
+<%= render 'signup/homepage' do %>
+  <%= form_tag sessions_path, class: 'w-full mt-10' do |form| %>
+    <h1 class='font-bold text-xl text-center mb-6'>Login</h1>
+
+    <%= text_field_tag :email, '', placeholder: 'Email', class: 'text-input mb-5 w-full' %>
+    <%= password_field_tag :password, '', placeholder: 'Password', class: 'text-input mb-5 w-full' %>
+    
+    <%= submit_tag 'Login', class: 'btn btn-primary w-full' %>
+  <% end %>
+
+  <%= link_to 'Sign up', signup_path, class: 'block my-4' %>
+<% end %>

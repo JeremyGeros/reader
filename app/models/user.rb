@@ -5,6 +5,9 @@ class User < ApplicationRecord
 
   has_many :user_sessions, dependent: :destroy
 
+  has_many :sources, dependent: :destroy
+  has_many :articles, dependent: :destroy
+
   # Verify that email field is not blank and that it doesn't already exist in the db (prevents duplicates):
   validates :email, presence: true, uniqueness: true
   validates :email, format: { with: /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z\d\-]+)*\.[a-z]+\z/i }

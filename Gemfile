@@ -59,6 +59,10 @@ gem "down", "~> 5.0"
 gem 'ranked-model'
 gem 'pagy'
 gem 'color', '~> 1.8'
+gem 'nokogiri'
+
+gem 'execjs'
+gem 'rss'
 
 gem 'whenever', require: false
 
