@@ -79,8 +79,12 @@
     @apply text-blue-600 bg-blue-100 border-blue-200;
   }
 
-  .article.expanded .floating-controls, .article.expanded .article-header-buttons {
+  .article.expanded .floating-controls {
     @apply block;
+  }
+
+  .article.expanded .article-header-buttons {
+    @apply flex;
   }
 
   .article.expanded .article-header {

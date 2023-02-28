@@ -33,4 +33,9 @@ class User < ApplicationRecord
   def preferred_size
     "medium"
   end
+
+  def preferred_code_style
+    code_style = "dimmed"
+    "code-theme-#{code_style}"
+  end
 end

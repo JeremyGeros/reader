@@ -48,7 +48,7 @@ class Article < ApplicationRecord
   def parse!
     return if parse_progress_in_progress?
     if raw_html.attached?
-      update(parse_progress: :in_progress)
+      update(parse_progress: :in_progress, name: nil)
       ParseArticleJob.perform_now(self)
     end
   end

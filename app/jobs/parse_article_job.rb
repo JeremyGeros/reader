@@ -12,12 +12,12 @@ class ParseArticleJob < ApplicationJob
     output = output.strip
     readability = JSON.parse(output)
 
-    article.name = readability["title"].presence if article.name.blank?
+    article.name = readability["title"].presence&.strip if article.name.blank?
 
     article.update!(
-      language: readability["lang"],
-      byline: readability["byline"],
-      excerpt: readability["excerpt"],
+      language: readability["lang"]&.strip,
+      byline: readability["byline"]&.strip,
+      excerpt: readability["excerpt"]&.strip,
       extracted_content: readability["content"],
       extracted_text: readability["textContent"],
       parse_progress: :complete,

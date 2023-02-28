@@ -11,19 +11,28 @@
                 <%= pretty_date_display(article.display_date) %>
               </div>
             </div>
-            <div class='article-header-buttons hidden'>
-              <button class='rounded border border-gray-300 p-1' data-action="click->article-expand#toggle">
+            <div class='article-header-buttons hidden gap-2'>
+              <button class='rounded border border-gray-300 p-1' data-action="click->article-expand#toggle" data-controller='tooltip' data-tooltip='Collapse'>
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
                   <path stroke-linecap="round" stroke-linejoin="round" d="M3 4.5h14.25M3 9h9.75M3 13.5h5.25m5.25-.75L17.25 9m0 0L21 12.75M17.25 9v12" />
                 </svg>
               </button>
-              <%= link_to 'Reparse', reparse_article_path(article), class: 'btn btn-link' %>
+              <%= link_to article.url, target: '_blank', class: 'block rounded border border-gray-300 p-1', data: { controller: 'tooltip', tooltip: 'Open' } do %>
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25" />
+                </svg>
+              <% end %>
+              <%= link_to reparse_article_path(article), class: 'block rounded border border-gray-300 p-1', data: { controller: 'tooltip', tooltip: 'Re-parse Article' } do %>
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 12c0-1.232-.046-2.453-.138-3.662a4.006 4.006 0 00-3.7-3.7 48.678 48.678 0 00-7.324 0 4.006 4.006 0 00-3.7 3.7c-.017.22-.032.441-.046.662M19.5 12l3-3m-3 3l-3-3m-12 3c0 1.232.046 2.453.138 3.662a4.006 4.006 0 003.7 3.7 48.656 48.656 0 007.324 0 4.006 4.006 0 003.7-3.7c.017-.22.032-.441.046-.662M4.5 12l3 3m-3-3l-3 3" />
+                </svg>
+              <% end %>
             </div>
           </div>
         </div>
       </div>
 
-      <div class='w-[750px] mx-auto overflow-hidden h-[130px] relative text-md article-width <%= Current.user.preferred_size %>' data-article-expand-target='content'>
+      <div class='w-[750px] mx-auto overflow-hidden h-[130px] relative text-md article-width <%= Current.user.preferred_size %> <%= Current.user.preferred_code_style %>' data-article-expand-target='content'>
         <%== article.extracted_content %>
 
         <div class='absolute bottom-0 left-0 right-0 bg-gradient-to-b from-transparent to-white/80 h-4'>
