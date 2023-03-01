@@ -14,12 +14,16 @@ class ParseArticleJob < ApplicationJob
 
     article.name = readability["title"].presence&.strip if article.name.blank?
 
+    extracted_text = readability["textContent"]&.strip
+    extracted_text&.gsub!(/ {2,}/, " ")
+
     article.update!(
-      language: readability["lang"]&.strip,
-      byline: readability["byline"]&.strip,
-      excerpt: readability["excerpt"]&.strip,
+      byline: readability["author"]&.strip || readability["byline"]&.strip,
+      excerpt: readability["excerpt"]&.strip || readability["description"]&.strip,
       extracted_content: readability["content"],
-      extracted_text: readability["textContent"],
+      extracted_text: extracted_text,
+      ttr: readability["ttr"],
+      header_image_url: readability["image"]&.strip,
       parse_progress: :complete,
     )
   rescue => e

@@ -6,7 +6,7 @@ Rails.application.routes.draw do
   get '/feeds', to: 'feeds#feeds', as: 'feed_feeds'
   get '/read_later', to: 'feeds#read_later', as: 'feed_read_later'
   
-  resources :articles, only: [:index, :show, :new, :create] do
+  resources :articles do
     member do
       get 'reparse'
     end

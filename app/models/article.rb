@@ -1,8 +1,13 @@
+require 'open-uri'
+
 class Article < ApplicationRecord
   belongs_to :source, optional: true
   belongs_to :user
 
   has_one_attached :raw_html
+  has_one_attached :header_image do |attachable|
+    attachable.variant :head, resize: "750x400^", gravity: "center", extent: "750x400"
+  end
 
   validates :url, presence: true
 
@@ -12,7 +17,7 @@ class Article < ApplicationRecord
   # Most recent scope either by coalcesed published_at or created_at
   scope :most_recent, -> { order(Arel.sql('COALESCE(articles.published_at, articles.created_at) DESC')) }
 
-  scope :ready, -> { where(parse_progress: :complete) }
+  scope :ready, -> {  }
   
   enum parse_progress: {
     not_started: 0,
@@ -51,5 +56,19 @@ class Article < ApplicationRecord
       update(parse_progress: :in_progress, name: nil)
       ParseArticleJob.perform_now(self)
     end
+  end
+
+  def excerpt_or_content
+    excerpt.presence || extracted_text.truncate(340)
+  end
+
+  def header_image_url=(url)
+    url = URI.parse(url)
+    filename = File.basename(url.path)
+    file = URI.open(url)
+    header_image.attach(io: file, filename: filename)
+  rescue => e
+    Rails.logger.info "Article header image url: #{e}"
+    nil
   end
 end

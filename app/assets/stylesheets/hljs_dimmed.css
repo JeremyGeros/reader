@@ -1,0 +1,107 @@
+.code-theme-dimmed .hljs {
+  display: block;
+  overflow-x: auto;
+
+  color: #cdd9e5;
+  background: #22272e;
+  border-radius: 4px;
+}
+
+.code-theme-dimmed .hljs-comment,
+.code-theme-dimmed .hljs-punctuation {
+  color: #768390;
+}
+
+.code-theme-dimmed .hljs-attr,
+.code-theme-dimmed .hljs-attribute,
+.code-theme-dimmed .hljs-meta,
+.code-theme-dimmed .hljs-selector-attr,
+.code-theme-dimmed .hljs-selector-class,
+.code-theme-dimmed .hljs-selector-id {
+  color: #6cb6ff;
+}
+
+.code-theme-dimmed .hljs-variable,
+.code-theme-dimmed .hljs-literal,
+.code-theme-dimmed .hljs-number,
+.code-theme-dimmed .hljs-doctag {
+  color: #f69d50;
+}
+
+.code-theme-dimmed .hljs-params {
+  color: #cdd9e5;
+}
+
+.code-theme-dimmed .hljs-function {
+  color: #dcbdfb;
+}
+
+.code-theme-dimmed .hljs-class,
+.code-theme-dimmed .hljs-tag,
+.code-theme-dimmed .hljs-title,
+.code-theme-dimmed .hljs-built_in {
+  color: #8ddb8c;
+}
+
+.code-theme-dimmed .hljs-keyword,
+.code-theme-dimmed .hljs-type,
+.code-theme-dimmed .hljs-builtin-name,
+.code-theme-dimmed .hljs-meta-keyword,
+.code-theme-dimmed .hljs-template-tag,
+.code-theme-dimmed .hljs-template-variable {
+  color: #f47067;
+}
+
+.code-theme-dimmed .hljs-string,
+.code-theme-dimmed .hljs-undefined {
+  color: #96d0ff;
+}
+
+.code-theme-dimmed .hljs-regexp {
+  color: #96d0ff;
+}
+
+.code-theme-dimmed .hljs-symbol {
+  color: #6cb6ff;
+}
+
+.code-theme-dimmed .hljs-bullet {
+  color: #f69d50;
+}
+
+.code-theme-dimmed .hljs-section {
+  color: #6cb6ff;
+  font-weight: bold;
+}
+
+.code-theme-dimmed .hljs-quote,
+.code-theme-dimmed .hljs-name,
+.code-theme-dimmed .hljs-selector-tag,
+.code-theme-dimmed .hljs-selector-pseudo {
+  color: #8ddb8c;
+}
+
+.code-theme-dimmed .hljs-emphasis {
+  color: #f69d50;
+  font-style: italic;
+}
+
+.code-theme-dimmed .hljs-strong {
+  color: #f69d50;
+  font-weight: bold;
+}
+
+.code-theme-dimmed .hljs-deletion {
+  color: #ff938a;
+  background-color: #78191b;
+}
+
+.code-theme-dimmed .hljs-addition {
+  color: #8ddb8c;
+  background-color: #113417;
+}
+
+.code-theme-dimmed .hljs-link {
+  color: #96d0ff;
+  font-style: underline;
+}

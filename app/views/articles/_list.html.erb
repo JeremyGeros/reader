@@ -1,46 +1,61 @@
 <% articles.each do |article| %>
-  <div class="article flex flex-col border-b border-gray-300 cursor-pointer hover:border-blue-400 relative group" data-controller='article-expand'>
-  
-      <div class='article-header top-0 bg-white mb-2 border-b border-transparent z-10 py-2'>
-        <div class='w-[750px] mx-auto article-width <%= Current.user.preferred_size %>'>
+  <div class="article flex flex-col mb-6 relative " data-controller='article-expand'>
+    <div class='w-[750px] mx-auto article-width relative border border-transparent hover:border-primary-button rounded overflow-hidden group <%= Current.user.preferred_size %>'>
+      <div class='article-header top-0 z-10'>
+        <div class='mx-auto bg-primary border-b border-transparent py-2 px-6'>
+          <% if article.header_image.attached? %>
+            <div class='max-h-[120px] overflow-hidden rounded mb-2 mt-4 article-header-image'>
+              <%= image_tag article.header_image, width: '100%', class: 'rounded' %>
+            </div>
+          <% end %>
           <div class='flex items-center'>
             <div class='flex-1'>
               <h1 class='text-xl font-bold'><%= article.name %></h1>
               <div class='flex text-gray-600'>
-                <% if article.source.present? %><h2 class='mr-5'><%= article.source.pretty_name %></h2><% end %>
-                <%= pretty_date_display(article.display_date) %>
+                <% if article.source.present? %>
+                  <h2 class='mr-5'><%= link_to article.source.pretty_name, article.url, target: '_blank', rel: 'noopener noreferrer' %></h2>
+                <% else %>
+                  <h2 class='mr-5'><%= link_to URI.parse(article.url).host, article.url, target: '_blank', rel: 'noopener noreferrer' %></h2>
+                <% end %>
+                <span><%= article.byline %></span>
               </div>
             </div>
             <div class='article-header-buttons hidden gap-2'>
-              <button class='rounded border border-gray-300 p-1' data-action="click->article-expand#toggle" data-controller='tooltip' data-tooltip='Collapse'>
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+              <button class='btn btn-secondary px-2 py-2' data-action="click->article-expand#toggle" data-controller='tooltip' data-tooltip='Collapse'>
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
                   <path stroke-linecap="round" stroke-linejoin="round" d="M3 4.5h14.25M3 9h9.75M3 13.5h5.25m5.25-.75L17.25 9m0 0L21 12.75M17.25 9v12" />
                 </svg>
               </button>
-              <%= link_to article.url, target: '_blank', class: 'block rounded border border-gray-300 p-1', data: { controller: 'tooltip', tooltip: 'Open' } do %>
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+              <%= link_to article.url, target: '_blank', class: 'block btn btn-secondary px-2 py-2', data: { controller: 'tooltip', tooltip: 'Open' }, rel: 'noopener noreferrer' do %>
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
                   <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25" />
                 </svg>
               <% end %>
-              <%= link_to reparse_article_path(article), class: 'block rounded border border-gray-300 p-1', data: { controller: 'tooltip', tooltip: 'Re-parse Article' } do %>
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+              <%= link_to reparse_article_path(article), class: 'block btn btn-secondary px-2 py-2', data: { controller: 'tooltip', tooltip: 'Redownload Article' } do %>
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
                   <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 12c0-1.232-.046-2.453-.138-3.662a4.006 4.006 0 00-3.7-3.7 48.678 48.678 0 00-7.324 0 4.006 4.006 0 00-3.7 3.7c-.017.22-.032.441-.046.662M19.5 12l3-3m-3 3l-3-3m-12 3c0 1.232.046 2.453.138 3.662a4.006 4.006 0 003.7 3.7 48.656 48.656 0 007.324 0 4.006 4.006 0 003.7-3.7c.017-.22.032-.441.046-.662M4.5 12l3 3m-3-3l-3 3" />
                 </svg>
+              <% end %>
+
+              <%= link_to article_path(article), class: 'btn btn-secondary px-2 py-2 hover:bg-red-400', data: { controller: 'tooltip', tooltip: 'Delete', "turbo-method": :delete, turbo_confirm: 'Are you sure you want to delete this article?' } do %>
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0" />
+                </svg>
+
               <% end %>
             </div>
           </div>
         </div>
       </div>
 
-      <div class='w-[750px] mx-auto overflow-hidden h-[130px] relative text-md article-width <%= Current.user.preferred_size %> <%= Current.user.preferred_code_style %>' data-article-expand-target='content'>
-        <%== article.extracted_content %>
-
-        <div class='absolute bottom-0 left-0 right-0 bg-gradient-to-b from-transparent to-white/80 h-4'>
-        </div>
-
-        <div class='expander-overlay absolute bottom-0 left-0 right-0 bg-gradient-to-b from-transparent to-white h-3/4 hidden group-hover:block' data-action="click->article-expand#toggle">
-          <button class='rounded-full text-sm border border-gray-300 top-1/2 -translate-x-1/2 relative left-1/2 bg-white px-2 py-1'>Click to expand</button>
-        </div>
+      <div class=' mx-auto overflow-hidden relative text-md article-content bg-primary px-6 pb-2 <%= Current.user.preferred_code_style %>' data-article-expand-target='content'>
+        <div class='excerpt'><%== article.excerpt_or_content %></div>
+        <div class='extracted-content hidden pt-6'><%== article.extracted_content %></div>
       </div>
+
+      <div class='expander-overlay absolute bottom-0 left-0 right-0 bg-gradient-to-b from-transparent to-white h-3/4 hidden group-hover:block cursor-pointer' data-action="click->article-expand#toggle">
+        <button class='rounded-full text-sm border border-primary-button top-1/2 -translate-x-1/2 relative left-1/2 bg-white px-2 py-1'>Click to expand</button>
+      </div>
+    </div>
   </div>
 <% end %>

@@ -1,0 +1,106 @@
+.code-theme-dark .hljs {
+  display: block;
+  overflow-x: auto;
+
+  color: #c9d1d9;
+  background: #0d1117;
+}
+
+.code-theme-dark .hljs-comment,
+.code-theme-dark .hljs-punctuation {
+  color: #8b949e;
+}
+
+.code-theme-dark .hljs-attr,
+.code-theme-dark .hljs-attribute,
+.code-theme-dark .hljs-meta,
+.code-theme-dark .hljs-selector-attr,
+.code-theme-dark .hljs-selector-class,
+.code-theme-dark .hljs-selector-id {
+  color: #79c0ff;
+}
+
+.code-theme-dark .hljs-variable,
+.code-theme-dark .hljs-literal,
+.code-theme-dark .hljs-number,
+.code-theme-dark .hljs-doctag {
+  color: #ffa657;
+}
+
+.code-theme-dark .hljs-params {
+  color: #c9d1d9;
+}
+
+.code-theme-dark .hljs-function {
+  color: #d2a8ff;
+}
+
+.code-theme-dark .hljs-class,
+.code-theme-dark .hljs-tag,
+.code-theme-dark .hljs-title,
+.code-theme-dark .hljs-built_in {
+  color: #7ee787;
+}
+
+.code-theme-dark .hljs-keyword,
+.code-theme-dark .hljs-type,
+.code-theme-dark .hljs-builtin-name,
+.code-theme-dark .hljs-meta-keyword,
+.code-theme-dark .hljs-template-tag,
+.code-theme-dark .hljs-template-variable {
+  color: #ff7b72;
+}
+
+.code-theme-dark .hljs-string,
+.code-theme-dark .hljs-undefined {
+  color: #a5d6ff;
+}
+
+.code-theme-dark .hljs-regexp {
+  color: #a5d6ff;
+}
+
+.code-theme-dark .hljs-symbol {
+  color: #79c0ff;
+}
+
+.code-theme-dark .hljs-bullet {
+  color: #ffa657;
+}
+
+.code-theme-dark .hljs-section {
+  color: #79c0ff;
+  font-weight: bold;
+}
+
+.code-theme-dark .hljs-quote,
+.code-theme-dark .hljs-name,
+.code-theme-dark .hljs-selector-tag,
+.code-theme-dark .hljs-selector-pseudo {
+  color: #7ee787;
+}
+
+.code-theme-dark .hljs-emphasis {
+  color: #ffa657;
+  font-style: italic;
+}
+
+.code-theme-dark .hljs-strong {
+  color: #ffa657;
+  font-weight: bold;
+}
+
+.code-theme-dark .hljs-deletion {
+  color: #ffa198;
+  background-color: #490202;
+}
+
+.code-theme-dark .hljs-addition {
+  color: #7ee787;
+  background-color: #04260f;
+}
+
+.code-theme-dark .hljs-link {
+  color: #a5d6ff;
+  font-style: underline;
+}

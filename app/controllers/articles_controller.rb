@@ -18,6 +18,11 @@ class ArticlesController < ApplicationController
     end
   end
 
+  def destroy
+    @article.destroy
+    redirect_to root_url
+  end
+
   def reparse
     @article.raw_html.destroy
     @article.read_later_save

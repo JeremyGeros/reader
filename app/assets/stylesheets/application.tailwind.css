@@ -2,9 +2,27 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer base {
+  :root {
+    --color-primary: 255 255 255;
+    --color-secondary: 247 247 247;
+    --color-borders: 237 237 240;
+
+    --color-text: 23 22 24;
+
+    /* --color-tertiary: 239 239 239; */
+    
+    --color-primary-button: 37 90 245;
+    --color-primary-button-color: 255 255 255;
+    --color-primary-button-hover: 240 240 240;
+
+    
+  }
+}
+
 @layer components {
   .btn {
-    @apply text-white py-2 px-4 rounded cursor-pointer;
+    @apply text-text py-2 px-4 rounded cursor-pointer;
   }
 
   .btn-small {
@@ -12,27 +30,19 @@
   }
 
   .btn-primary {
-    @apply bg-pink-600/70;
+    @apply bg-primary-button text-primary-button-color;
   }
 
   .btn-primary:hover {
-    @apply bg-pink-800;
-  }
-
-  .btn-blue {
-    @apply bg-blue;
-  }
-
-  .btn-blue:hover {
-    @apply bg-blue-light;
+    @apply bg-primary-button-hover;
   }
 
   .btn-secondary {
-    @apply bg-zinc-800;
+    @apply bg-gray-100 text-text;
   }
 
   .btn-secondary:hover {
-    @apply bg-pink-600/40;
+    @apply bg-orange-200;
   }
 
   .btn-danger {
@@ -51,14 +61,6 @@
     @apply text-gray-600 underline;
   }
 
-  .btn-sidebar {
-    @apply text-gray-900 text-lg border-b border-gray-300 lg:px-5 px-10 rounded-none;
-  }
-
-  .btn-sidebar:hover {
-    @apply bg-white;
-  }
-
   .text-input {
     @apply block rounded px-2 py-2 bg-white border border-zinc-300 text-gray-900 outline-none;
   }
@@ -72,11 +74,11 @@
   }
 
   .nav-active {
-    @apply text-blue-600 bg-blue-100 border-blue-200;
+    @apply text-primary bg-primary-button;
   }
 
   .nav-active:hover {
-    @apply text-blue-600 bg-blue-100 border-blue-200;
+    @apply text-primary-button-color !bg-primary-button;
   }
 
   .article.expanded .floating-controls {
@@ -88,11 +90,35 @@
   }
 
   .article.expanded .article-header {
-    @apply sticky border-gray-100;
+    @apply sticky;
+  }
+
+  .article.expanded .article-header > div {
+    @apply border-borders
   }
 
   .article.expanded .expander-overlay, .article.expanded:hover .expander-overlay {
     @apply !hidden;
+  }
+
+  .article.expanded .excerpt {
+    @apply hidden;
+  }
+  
+  .article.expanded .extracted-content {
+    @apply block;
+  }
+
+  .article.expanded .article-content {
+    @apply mb-6;
+  }
+
+  .article.expanded .article-header-image {
+    @apply hidden;
+  }
+
+  .article.expanded .article-width:hover {
+    @apply !border-transparent;
   }
 
   .article-width.small {
@@ -166,6 +192,10 @@
 
   .page a {
     @apply text-blue-500 ;
+  }
+
+  .page article > dl {
+    @apply hidden;
   }
 }
 
