@@ -1,0 +1,38 @@
+<div class='mx-auto bg-white rounded mt-10 article-width p-6'>
+  <h1 class='text-xl font-bold mb-4'>Preview source</h1>
+  <div class=''>
+    <%= form_with(model: @source, local: true, html: { autocomplete: "off", class: 'w-full'}) do |form| %>
+      <div class='flex'>
+        <%= hidden_field_tag 'source[temporary_at]', nil %>
+        <%= form.submit 'Add Source', class: 'btn btn-primary' %>
+      </div>
+    <% end %>
+  </div>
+</div>
+
+
+<%= turbo_frame_tag "preview_source" do %>
+  <div class='py-6'>
+    <% if @source.scan_progress_complete? %>
+      <%= render 'articles/list', articles: @source.articles, readerable: true, page: 'preview_source' %>
+    <% elsif @source.scan_progress_failed? %>
+      <p>Scanning source failed.</p>
+    <% else %>
+      <div class='article-width mx-auto'>
+        <p class='flex items-center justify-center'>
+          <svg class="animate-spin -ml-1 mr-3 h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+            <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+            <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+          </svg>
+          Scanning source...
+        </p>
+        <p class='flex items-center justify-center'>Page will refresh automatically when scan is complete.</p>
+        <%= javascript_tag do %>
+          setTimeout(function() {
+            Turbo.visit(window.location.href);
+          }, 3000);
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+<% end %>

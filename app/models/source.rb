@@ -6,6 +6,18 @@ class Source < ApplicationRecord
   validates :name, presence: true
   validates :url, presence: true
 
+  scope :ready, -> { where(scan_progress: :complete) }
+  scope :not_preview, -> { where(temporary_at: nil) }
+
+  after_commit :scan, on: :create
+
+  enum scan_progress: {
+    not_scanned: 0,
+    scanning: 1,
+    complete: 2,
+    failed: 3,
+  }, _prefix: true
+
 
   enum scan_interval: {
     hourly: 0,
@@ -16,6 +28,11 @@ class Source < ApplicationRecord
     always: 5,
   }
 
+  before_validation :set_defaults
+
+  def set_defaults
+    self.name ||= url
+  end
 
   def scan_interval_in_seconds
     case scan_interval
@@ -35,8 +52,14 @@ class Source < ApplicationRecord
   def scan
     return if scan_interval == 'never'
 
-    if last_scanned.nil? || last_scanned < scan_interval_in_seconds.ago
-      update(last_scanned: Time.now)
+    if (last_scanned_at.nil? || last_scanned_at < scan_interval_in_seconds.ago) 
+      scan!
+    end
+  end
+
+  def scan!
+    if !scan_progress_scanning?
+      update(scan_progress: :scanning)
       ScanSourceJob.perform_later(self)
     end
   end

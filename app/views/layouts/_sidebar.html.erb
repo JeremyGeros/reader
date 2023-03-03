@@ -7,7 +7,7 @@
       <%= link_to '⏳ Read later', feed_read_later_path, class: "btn hover:bg-primary-button-hover #{nav_active('feeds', 'read_later')}" %>
       <%= link_to '📖 Notes', notes_path, class: "btn hover:bg-primary-button-hover #{nav_active('notes')}" %>
 
-      <%= link_to '📦 Archived', feed_archived_path, class: "btn hover:bg-primary-button-hover #{nav_active('feeds', 'archived')}" %>
+      <%= link_to '📦 Read', feed_read_path, class: "btn hover:bg-primary-button-hover #{nav_active('feeds', 'read')}" %>
       
       
       <%= link_to 'New source', new_source_path %>
@@ -15,7 +15,7 @@
     </div>
 
     <div class='flex flex-col'>
-      <div class='flex mb-2 items-center gap-2 justify-center viewport-buttons <%= Current.user.preferred_size %>' data-controller='viewport-width' data-viewport-width-size-value='<%= Current.user.preferred_size %>'>
+      <div class='flex mb-2 items-center gap-2 justify-center viewport-buttons' data-controller='viewport-width' data-viewport-width-size-value='<%= Current.user.preferred_size %>'>
         <div class='viewport-button-minus btn btn-secondary' data-action='click->viewport-width#minus'>
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
             <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 12h-15" />

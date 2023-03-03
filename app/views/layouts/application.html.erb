@@ -27,7 +27,7 @@
     <script src="https://unpkg.com/@popperjs/core@2"></script>
   </head>
 
-  <body class="bg-secondary text-gray-900">
+  <body class="bg-secondary text-gray-900 <%= preference_classes %>">
     <div class='flex'>
       <%= render 'layouts/sidebar' if Current.user.present? %>
       <main class="flex-1 overflow-scroll h-screen">

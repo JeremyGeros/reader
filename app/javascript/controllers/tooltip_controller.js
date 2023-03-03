@@ -1,12 +1,12 @@
 import { Controller } from '@hotwired/stimulus';
-import { createPopper, showPoppper, hidePopper } from '../popper';
+import { createPopper, showPoppper, hidePopper } from '../utils/popper';
 
 const showEvents = ['mouseenter', 'focus'];
 const hideEvents = ['mouseleave', 'blur'];
 
 export default class extends Controller {
 	connect() {
-		this.popper = createPopper(this.element);
+		this.popper = createPopper(this.element, 'bottom');
 
 		showEvents.forEach((event) => {
 			this.element.addEventListener(event, this.show);

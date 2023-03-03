@@ -1,7 +1,13 @@
 import { Controller } from '@hotwired/stimulus';
+import { updateArticle } from '../utils/api';
 
 export default class extends Controller {
 	static targets = ['content', 'button'];
+
+	static values = {
+		read: Boolean,
+		page: String,
+	};
 
 	toggle() {
 		if (this.element.classList.contains('expanded')) {
@@ -33,27 +39,18 @@ export default class extends Controller {
 	undoRead(e) {
 		e.preventDefault();
 
-		if (this.element.classList.contains('read')) {
+		if (this.readValue === true) {
 			setTimeout(() => {
-				this.updateArticle({
+				updateArticle({
 					id: this.element.dataset.id,
 					article: { read_status: 'new' },
 				});
 				this.element.classList.remove('read');
+				console.log(this.pageValue);
+				if (this.pageValue === 'read') {
+					this.element.remove();
+				}
 			}, 0);
 		}
-	}
-
-	updateArticle(params) {
-		fetch(`/articles/${params.id}`, {
-			method: 'PATCH',
-			headers: {
-				'Content-Type': 'application/json',
-				Accept: 'application/json',
-				'X-CSRF-Token': document.querySelector('meta[name="csrf-token"]')
-					.content,
-			},
-			body: JSON.stringify(params),
-		});
 	}
 }

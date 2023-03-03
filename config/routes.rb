@@ -5,7 +5,7 @@ Rails.application.routes.draw do
   get '/all', to: 'feeds#all', as: 'feed_all'
   get '/feeds', to: 'feeds#feeds', as: 'feed_feeds'
   get '/read_later', to: 'feeds#read_later', as: 'feed_read_later'
-  get '/archived', to: 'feeds#archived', as: 'feed_archived'
+  get '/read', to: 'feeds#read', as: 'feed_read'
   
   resources :articles do
     member do
@@ -16,11 +16,14 @@ Rails.application.routes.draw do
   resources :sources do
     member do
       get 'scan'
+      get 'preview'
     end
   end
 
   resources :notes do
   end
+
+  resources :users, only: [:edit, :update, :destroy]
 
   get 'external/read_later', to: 'external_articles#read_later', as: 'external_read_later'
 

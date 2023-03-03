@@ -1,5 +1,6 @@
 import { Controller } from '@hotwired/stimulus';
-import { createPopper, showPoppper, hidePopper } from '../popper';
+import { createPopper, showPoppper, hidePopper } from '../utils/popper';
+import { createNote, deleteNote, updateArticle } from '../utils/api';
 
 function getSelected() {
 	if (window.getSelection) {
@@ -99,60 +100,33 @@ export default class extends Controller {
 
 		span.outerHTML = text;
 
-		fetch(`/notes/${noteId}`, {
-			method: 'DELETE',
-			headers: {
-				'Content-Type': 'application/json',
-				Accept: 'application/json',
-				'X-CSRF-Token': document.querySelector('meta[name="csrf-token"]')
-					.content,
-			},
-		}).then(() => {
+		deleteNote(noteId, () => {
 			this.saveArticleContents();
 		});
 	};
 
 	createNote = (span) => {
-		fetch('/notes', {
-			method: 'POST',
-			headers: {
-				'Content-Type': 'application/json',
-				Accept: 'application/json',
-				'X-CSRF-Token': document.querySelector('meta[name="csrf-token"]')
-					.content,
+		params = {
+			note: {
+				article_id: this.element.dataset.id,
+				text: span.innerText,
 			},
-			body: JSON.stringify({
-				note: {
-					article_id: this.element.dataset.id,
-					text: span.innerText,
-				},
-			}),
-		})
-			.then((response) => response.json())
-			.then((data) => {
-				span.id = `note-${data.id}`;
-			})
-			.then(() => {
-				this.saveArticleContents();
-			});
+		};
+		createNote(params, (data) => {
+			span.id = `note-${data.id}`;
+			this.saveArticleContents();
+		});
 	};
 
 	saveArticleContents = () => {
-		fetch(`/articles/${this.element.dataset.id}`, {
-			method: 'PATCH',
-			headers: {
-				'Content-Type': 'application/json',
-				Accept: 'application/json',
-				'X-CSRF-Token': document.querySelector('meta[name="csrf-token"]')
-					.content,
+		params = {
+			id: this.element.dataset.id,
+			article: {
+				edited_content: this.element.innerHTML,
 			},
-			body: JSON.stringify({
-				id: this.element.dataset.id,
-				article: {
-					edited_content: this.element.innerHTML,
-				},
-			}),
-		});
+		};
+
+		updateArticle(params);
 	};
 
 	selectionChanged = () => {

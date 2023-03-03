@@ -18,6 +18,38 @@ class User < ApplicationRecord
 
   validate :allow_signup?
 
+  enum preferred_size: {
+    small: 0,
+    medium: 1,
+    large: 2,
+    xlarge: 3,
+    full: 4,
+  }, _prefix: true
+
+  enum preferred_code_style: {
+    dimmed: 0,
+    bright: 1,
+    dark: 2,
+  }, _prefix: true
+
+  enum preferred_font: {
+    default: 0,
+    monospace: 1,
+  }, _prefix: true
+
+  enum preferred_theme: {
+    light: 0,
+    dark: 1,
+  }, _prefix: true
+
+  enum preferred_font_size: {
+    sm: 0,
+    md: 1,
+    lg: 2,
+    xl: 3,
+  }, _prefix: true
+
+
   def tidy_up_details
     self.email = email.strip.downcase
   end
@@ -29,14 +61,5 @@ class User < ApplicationRecord
 
   def admin?
     ADMIN_EMAILS.include?(email)
-  end
-  
-  def preferred_size
-    "medium"
-  end
-
-  def preferred_code_style
-    code_style = "dimmed"
-    "code-theme-#{code_style}"
   end
 end

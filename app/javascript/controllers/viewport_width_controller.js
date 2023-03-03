@@ -1,4 +1,5 @@
 import { Controller } from '@hotwired/stimulus';
+import { updateUser } from '../utils/api';
 
 const sizes = ['small', 'medium', 'large', 'xlarge', 'full'];
 
@@ -6,14 +7,9 @@ export default class extends Controller {
 	static values = { size: String };
 
 	removeAllSizes() {
-		document.querySelectorAll('.article-width').forEach((article) => {
-			sizes.forEach((size) => {
-				article.classList.remove(size);
-			});
-		});
-
+		const body = document.querySelector('body');
 		sizes.forEach((size) => {
-			this.element.classList.remove(size);
+			body.classList.remove(`size-${size}`);
 		});
 	}
 
@@ -47,10 +43,13 @@ export default class extends Controller {
 	}
 
 	setSize(size) {
-		this.removeAllSizes();
-		document.querySelectorAll('.article-width').forEach((article) => {
-			article.classList.add(size);
+		updateUser({
+			user: {
+				preferred_size: size,
+			},
 		});
-		this.element.classList.add(size);
+		this.removeAllSizes();
+		const body = document.querySelector('body');
+		body.classList.add(`size-${size}`);
 	}
 }

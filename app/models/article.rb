@@ -19,7 +19,7 @@ class Article < ApplicationRecord
   # Most recent scope either by coalcesed published_at or created_at
   scope :most_recent, -> { order(Arel.sql('COALESCE(articles.published_at, articles.created_at) DESC')) }
 
-  scope :ready, -> { where(parse_progress: :complete) }
+  scope :ready, -> { where(parse_progress: :complete).left_outer_joins(:source).where('articles.source_id IS NULL or sources.temporary_at IS NULL') }
   
   enum parse_progress: {
     not_started: 0,
