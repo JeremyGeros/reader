@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_03_01_155756) do
+ActiveRecord::Schema[7.0].define(version: 2023_03_03_015000) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -70,8 +70,20 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_01_155756) do
     t.string "language"
     t.datetime "published_at"
     t.integer "ttr", default: 0, null: false
+    t.text "edited_content"
     t.index ["source_id"], name: "index_articles_on_source_id"
     t.index ["user_id"], name: "index_articles_on_user_id"
+  end
+
+  create_table "notes", force: :cascade do |t|
+    t.text "text", null: false
+    t.bigint "article_id", null: false
+    t.bigint "user_id", null: false
+    t.integer "highlight_type", default: 0, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["article_id"], name: "index_notes_on_article_id"
+    t.index ["user_id"], name: "index_notes_on_user_id"
   end
 
   create_table "sources", force: :cascade do |t|
@@ -109,6 +121,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_01_155756) do
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "articles", "sources"
   add_foreign_key "articles", "users"
+  add_foreign_key "notes", "articles"
+  add_foreign_key "notes", "users"
   add_foreign_key "sources", "users"
   add_foreign_key "user_sessions", "users"
 end

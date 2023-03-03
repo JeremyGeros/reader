@@ -1,0 +1,21 @@
+<% notes.each do |note| %>
+  <div class=''>
+    <div class='flex items-center'>
+      <div class='flex-1'>
+        <h1 class='text-xl font-bold'><%= link_to note.article.name, article_path(note.article, name: note.hash_link) %></h1>
+        <div class='flex text-gray-600'>
+          <% if note.article.source.present? %>
+            <h2 class='mr-5'><%= link_to note.article.source.pretty_name, note.article.url, target: '_blank', rel: 'noopener noreferrer' %></h2>
+          <% else %>
+            <h2 class='mr-5'><%= link_to URI.parse(note.article.url).host, note.article.url, target: '_blank', rel: 'noopener noreferrer' %></h2>
+          <% end %>
+          <span><%= note.article.byline %></span>
+        </div>
+      </div>
+    </div>
+
+    <div class=''>
+      <%= note.text %>
+    </div>
+  </div>
+<% end %> 

@@ -7,7 +7,7 @@ class ParseArticleJob < ApplicationJob
     Rails.logger.info "ApplicationJob: ActiveStorage::Current.host = #{ActiveStorage::Current.host}"
     Rails.logger.info "ParseArticleJob: Parsing article #{article.id} #{article.url} #{article.raw_html.attached?}"
 
-    output = `node lib/article_parse.js #{article.url} #{article.raw_html.url}`
+    output = `node lib/article_parse.js #{article.url} #{article.raw_html.url} #{article.id}`
 
     output = output.strip
     readability = JSON.parse(output)

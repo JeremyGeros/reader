@@ -1,0 +1,26 @@
+<div class="article flex flex-col mb-6 relative <%= expanded ? 'expanded' : '' %>" data-controller='article-expand hotkeys' data-hotkeys-bindings-value='{"n": "article-expand#readAndNext"}' data-id="<%= article.id %>">
+  <div class='article-container w-[750px] mx-auto article-width relative border border-transparent hover:border-primary-button rounded group <%= Current.user.preferred_size %>'>
+    
+    <%= render 'articles/header', article: article %>
+
+
+    <div class=' mx-auto overflow-hidden relative text-md article-content bg-primary px-6 pb-2 rounded-b <%= Current.user.preferred_code_style %>' data-article-expand-target='content'>
+      <div class='excerpt'><%== article.excerpt_or_content %></div>
+      <div class='extracted-content hidden pt-6' data-controller='note-create' data-id='<%= article.id %>'><%== article.content %></div>
+    </div>
+
+    <div class='expander-overlay absolute bottom-0 left-0 right-0 bg-gradient-to-b from-transparent to-white h-3/4 hidden group-hover:block cursor-pointer rounded-b' data-action="click->article-expand#toggle">
+      <button class='rounded-full text-sm border border-primary-button top-1/2 -translate-x-1/2 relative left-1/2 bg-white px-2 py-1 expand-button'>Click to expand</button>
+    </div>
+  </div>
+
+  <div class='undo-button hidden absolute top-0 left-0 bottom-0 right-0 bg-white bg-opacity-50 items-center w-[750px] mx-auto article-width rounded <%= Current.user.preferred_size %>'>
+    <button class='btn btn-secondary flex items-center mx-auto shadow' data-action="article-expand#undoRead">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 mr-1">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M15 15l-6 6m0 0l-6-6m6 6V9a6 6 0 0112 0v3" />
+      </svg>
+
+      Undo Read
+    </button>
+  </div>
+</div>

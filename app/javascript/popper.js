@@ -1,4 +1,4 @@
-export function createPopper(button, tooltip_content) {
+export function createPopper(button, placement = 'auto') {
 	const tooltip = document.querySelector('#tooltip');
 
 	const popperInstance = Popper.createPopper(button, tooltip, {
@@ -10,48 +10,40 @@ export function createPopper(button, tooltip_content) {
 				},
 			},
 		],
+		placement,
 	});
 
-	function show() {
-		tooltip.querySelectorAll('#tooltip-content')[0].innerHTML = tooltip_content;
-		// Make the tooltip visible
-		tooltip.setAttribute('data-show', '');
+	return { tooltip, popperInstance };
+}
 
-		// Enable the event listeners
-		popperInstance.setOptions((options) => ({
-			...options,
-			modifiers: [
-				...options.modifiers,
-				{ name: 'eventListeners', enabled: true },
-			],
-		}));
+export function showPoppper({ tooltip, popperInstance }, tooltip_content) {
+	tooltip.querySelectorAll('#tooltip-content')[0].innerHTML = tooltip_content;
+	// Make the tooltip visible
+	tooltip.setAttribute('data-show', '');
 
-		// Update its position
-		popperInstance.update();
-	}
+	// Enable the event listeners
+	popperInstance.setOptions((options) => ({
+		...options,
+		modifiers: [
+			...options.modifiers,
+			{ name: 'eventListeners', enabled: true },
+		],
+	}));
 
-	function hide() {
-		// Hide the tooltip
-		tooltip.removeAttribute('data-show');
+	// Update its position
+	popperInstance.update();
+}
 
-		// Disable the event listeners
-		popperInstance.setOptions((options) => ({
-			...options,
-			modifiers: [
-				...options.modifiers,
-				{ name: 'eventListeners', enabled: false },
-			],
-		}));
-	}
+export function hidePopper({ tooltip, popperInstance }) {
+	// Hide the tooltip
+	tooltip.removeAttribute('data-show');
 
-	const showEvents = ['mouseenter', 'focus'];
-	const hideEvents = ['mouseleave', 'blur'];
-
-	showEvents.forEach((event) => {
-		button.addEventListener(event, show);
-	});
-
-	hideEvents.forEach((event) => {
-		button.addEventListener(event, hide);
-	});
+	// Disable the event listeners
+	popperInstance.setOptions((options) => ({
+		...options,
+		modifiers: [
+			...options.modifiers,
+			{ name: 'eventListeners', enabled: false },
+		],
+	}));
 }

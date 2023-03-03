@@ -3,7 +3,7 @@ class SourcesController < ApplicationController
   before_action :set_source, only: [:show, :edit, :update, :destroy, :scan]
 
   def index
-    @sources = Source.all.order(:name)
+    @sources = Current.user.sources.all.order(:name)
   end
 
   def show

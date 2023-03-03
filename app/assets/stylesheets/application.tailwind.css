@@ -38,7 +38,7 @@
   }
 
   .btn-secondary {
-    @apply bg-gray-100 text-text;
+    @apply bg-gray-100 text-text px-2 py-2;
   }
 
   .btn-secondary:hover {
@@ -121,6 +121,14 @@
     @apply !border-transparent;
   }
 
+  .article.read .undo-button {
+    @apply flex;
+  }
+
+  .article.read .article-container {
+    @apply opacity-30;
+  }
+
   .article-width.small {
     @apply !w-1/4;
   }
@@ -196,6 +204,10 @@
 
   .page article > dl {
     @apply hidden;
+  }
+
+  .highlighted {
+    @apply bg-yellow-100;
   }
 }
 

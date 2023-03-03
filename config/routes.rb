@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   get '/all', to: 'feeds#all', as: 'feed_all'
   get '/feeds', to: 'feeds#feeds', as: 'feed_feeds'
   get '/read_later', to: 'feeds#read_later', as: 'feed_read_later'
+  get '/archived', to: 'feeds#archived', as: 'feed_archived'
   
   resources :articles do
     member do
