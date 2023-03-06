@@ -1,7 +1,7 @@
 <% if Current.user %>
   <div class='flex flex-col h-screen py-3 px-3 z-10 bg-primary border-r border-borders w-[13%] dark:bg-zinc-800 dark:border-zinc-600'>
     <div class='flex flex-col flex-1 gap-2'>
-      <%= link_to 'Reader', root_path, class: 'font-serif font-bold text-3xl py-6 lg:px-5 px-10' %>
+      <%= link_to 'FEED ME', root_path, class: 'font-serif font-bold text-3xl py-6 lg:px-5 px-10' %>
       <%= link_to '🌎 All', feed_all_path, class: "btn hover:bg-primary-button/20 #{nav_active('feeds', 'all')}" %>
       <%= link_to '🖨 Sources', feed_feeds_path, class: "btn hover:bg-primary-button/20 #{nav_active('feeds', 'feeds')}" %>
       <%= link_to '⏳ Read later', feed_read_later_path, class: "btn hover:bg-primary-button/20 #{nav_active('feeds', 'read_later')}" %>

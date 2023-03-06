@@ -5,7 +5,7 @@
     <div class='flex items-center'>
       <div class='flex-1'>
         <h1 class='text-xl font-bold'><%= link_to article.name, article_path(article, anchor: notes.first.hash_link) %></h1>
-        <div class='flex text-gray-600'>
+        <div class='flex text-gray-600 dark:text-gray-300'>
           <% if article.source.present? %>
             <h2 class='mr-5'><%= link_to article.source.pretty_name, article.url, target: '_blank', rel: 'noopener noreferrer' %></h2>
           <% else %>
@@ -18,7 +18,7 @@
 
     <div class='mt-2'>
       <% notes.each do |note| %>
-        <div class='border-t border-borders first:pt-0 first:mt-3 pt-3 mt-3 first:border-none'>
+        <div class='border-t border-borders first:pt-0 first:mt-3 pt-3 mt-3 first:border-none dark:border-zinc-600'>
           <%= link_to note.text, article_path(note.article, anchor: note.hash_link), class: 'highlighted', data: { turbo: "false" } %>
         </div>
       <% end %>

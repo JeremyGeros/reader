@@ -24,27 +24,27 @@ module ApplicationHelper
   end
 
    def preferred_size_class
-    size = Current.user.preferred_size || "medium"
+    size = Current.user&.preferred_size || "medium"
     "size-#{size}"
   end
 
   def preferred_code_style_class
-    code_style = Current.user.preferred_code_style || "dimmed"
+    code_style = Current.user&.preferred_code_style || "dimmed"
     "code-theme-#{code_style}"
   end
 
   def preferred_theme_class
-    theme = Current.user.preferred_theme || "system"
+    theme = Current.user&.preferred_theme || "system"
     "#{theme}"
   end
 
   def preferred_font_class
-    font = Current.user.preferred_font || "default"
+    font = Current.user&.preferred_font || "default"
     "font-#{font}"
   end
 
   def preferred_font_size_class
-    font_size = Current.user.preferred_font_size || "md"
+    font_size = Current.user&.preferred_font_size || "md"
     "text-#{font_size}"
   end
 end

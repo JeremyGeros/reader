@@ -1,6 +1,8 @@
 require 'open-uri'
 
 class Article < ApplicationRecord
+  include Faviconable
+
   belongs_to :source, optional: true
   belongs_to :user
 
@@ -60,7 +62,7 @@ class Article < ApplicationRecord
     if raw_html.attached?
       notes.destroy_all
       update(parse_progress: :in_progress, name: nil, edited_content: nil, excerpt: nil, extracted_content: nil, extracted_text: nil, ttr: 0, header_image: nil)
-      ParseArticleJob.perform_now(self)
+      ParseArticleJob.perform_later(self)
     end
   end
 
@@ -76,5 +78,9 @@ class Article < ApplicationRecord
   rescue => e
     Rails.logger.info "Article header image url: #{e}"
     nil
+  end
+
+  def favicon_or_source_favicon
+    favicon.attached? ? favicon : source&.favicon
   end
 end

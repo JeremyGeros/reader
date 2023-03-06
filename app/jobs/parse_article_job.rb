@@ -17,6 +17,14 @@ class ParseArticleJob < ApplicationJob
     extracted_text = readability["textContent"]&.strip
     extracted_text&.gsub!(/ {2,}/, " ")
 
+    if !article.source && !article.favicon.attached?
+      url = readability["icon"]&.strip || readability["shortcut icon"]&.strip 
+      if url
+        url = "https://#{URI.parse(article.url).host}#{url}" if url.start_with?("/")
+        article.favicon_url = url
+      end
+    end
+
     article.update!(
       byline: readability["author"]&.strip || readability["byline"]&.strip,
       excerpt: readability["excerpt"]&.strip || readability["description"]&.strip,

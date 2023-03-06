@@ -59,7 +59,7 @@
   }
 
   .btn-link:hover {
-    @apply text-gray-600 underline;
+    @apply text-gray-600 underline dark:text-gray-300;
   }
 
   .text-input {
@@ -187,6 +187,10 @@
     @apply bg-blue-50 rounded p-2 border border-blue-200;
   }
 
+  .dark .page ul, .dark .page ol {
+    @apply bg-blue-900/50 text-white border-blue-900/50;
+  }
+
   .page svg {
     @apply hidden;
   }
@@ -216,7 +220,7 @@
   }
 
   .dark .highlighted {
-    @apply bg-yellow-700 text-white;
+    @apply bg-yellow-400 text-text;
   }
 }
 
