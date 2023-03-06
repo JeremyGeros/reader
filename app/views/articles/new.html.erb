@@ -1,5 +1,7 @@
-<h1>New article</h1>
-
 <%= turbo_frame_tag "new_article" do %>
-  <%= render 'form', article: @article %>
+  <div class='mx-auto bg-white dark:bg-zinc-800 rounded shadow mt-10 w-1/2 p-6'>
+    <h1 class='text-xl font-bold mb-4'>Save an article</h1>
+
+    <%= render 'form', article: @article %>
+  </div>
 <% end %>

@@ -22,7 +22,7 @@ export default class extends Controller {
 
 		if (this.element.classList.contains('expanded')) {
 			setTimeout(() => {
-				this.updateArticle({
+				updateArticle({
 					id: this.element.dataset.id,
 					article: { read_status: 'read' },
 				});

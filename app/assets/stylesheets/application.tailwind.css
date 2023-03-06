@@ -5,6 +5,8 @@
 @layer base {
   :root {
     --color-primary: 255 255 255;
+    --color-primary-dark: 20 20 20;
+
     --color-secondary: 247 247 247;
     --color-borders: 237 237 240;
 
@@ -14,15 +16,14 @@
     
     --color-primary-button: 37 90 245;
     --color-primary-button-color: 255 255 255;
-    --color-primary-button-hover: 240 240 240;
-
+    
     
   }
 }
 
 @layer components {
   .btn {
-    @apply text-text py-2 px-4 rounded cursor-pointer;
+    @apply text-text py-2 px-4 rounded cursor-pointer dark:text-white;
   }
 
   .btn-small {
@@ -34,15 +35,15 @@
   }
 
   .btn-primary:hover {
-    @apply bg-primary-button-hover;
+    @apply bg-primary-button/80;
   }
 
   .btn-secondary {
-    @apply bg-gray-100 text-text px-2 py-1 flex items-center;
+    @apply bg-gray-100 text-text px-2 py-1 flex items-center dark:bg-zinc-700 dark:text-white;
   }
 
   .btn-secondary:hover {
-    @apply bg-orange-200;
+    @apply bg-orange-200 dark:bg-orange-600;
   }
 
   .btn-danger {
@@ -62,7 +63,7 @@
   }
 
   .text-input {
-    @apply block rounded px-2 py-2 bg-white border border-zinc-300 text-gray-900 outline-none;
+    @apply block rounded px-2 py-2 bg-white border border-zinc-300 text-gray-900 outline-none dark:bg-zinc-700 dark:text-white dark:border-zinc-600;
   }
 
   .text-input:focus {
@@ -94,7 +95,7 @@
   }
 
   .article.expanded .article-header > div {
-    @apply border-borders
+    @apply border-borders dark:border-zinc-600
   }
 
   .article.expanded .expander-overlay, .article.expanded:hover .expander-overlay {
@@ -170,6 +171,10 @@
     @apply bg-gray-100 rounded px-1;
   }
 
+  .dark .page p > code {
+    @apply bg-zinc-600 text-white;
+  }
+
   .page h1, .page h2, .page h3 {
     @apply mb-1 mt-5 text-2xl font-bold;
   }
@@ -207,7 +212,11 @@
   }
 
   .highlighted {
-    @apply bg-yellow-100;
+    @apply bg-yellow-100 scroll-mt-40;
+  }
+
+  .dark .highlighted {
+    @apply bg-yellow-700 text-white;
   }
 }
 

@@ -20,7 +20,7 @@ module ApplicationHelper
   end
 
   def preference_classes
-    "#{preferred_size_class} #{preferred_code_style_class} #{preferred_theme_class} #{preferred_font_class} #{preferred_font_size_class}"
+    "#{preferred_size_class} #{preferred_code_style_class} #{preferred_font_class} #{preferred_font_size_class}"
   end
 
    def preferred_size_class
@@ -34,7 +34,7 @@ module ApplicationHelper
   end
 
   def preferred_theme_class
-    theme = Current.user.preferred_theme || "light"
+    theme = Current.user.preferred_theme || "system"
     "#{theme}"
   end
 

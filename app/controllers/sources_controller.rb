@@ -27,6 +27,9 @@ class SourcesController < ApplicationController
   end
 
   def preview
+    if params[:rescan]
+      @source.full_rescan!
+    end
   end
 
 
@@ -51,7 +54,7 @@ class SourcesController < ApplicationController
   end
 
   def scan
-    @source.scan!
+    @source.full_rescan!
     if @source.temporary_at?
       redirect_to preview_source_path(@source)
     else

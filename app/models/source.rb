@@ -1,7 +1,13 @@
+require 'uri'
+
 class Source < ApplicationRecord
   belongs_to :user
 
   has_many :articles, dependent: :destroy
+
+  has_one_attached :favicon
+
+  has_rich_text :description
 
   validates :name, presence: true
   validates :url, presence: true
@@ -64,8 +70,28 @@ class Source < ApplicationRecord
     end
   end
 
+  def full_rescan!
+    update(last_scanned_at: nil, rss_url: nil, scan_progress: :not_scanned, description: nil)
+    favicon.purge
+
+    scan!
+  end
+
   def pretty_name
     "#{name} (#{URI.parse(url).host})"
+  end
+
+  def favicon_url=(url)
+    return if url.blank?
+
+    io = URI.open(url)
+    uri = URI.parse(url)
+    filename = File.basename(uri.path)
+
+    favicon.attach(
+      io: io,
+      filename: filename,
+    )
   end
 
 end

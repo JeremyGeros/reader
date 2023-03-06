@@ -12,12 +12,11 @@
   <% end %>
 
   <div class='mb-4'>
-    <%= form.label :url %>
-    <%= form.text_field :url, class: 'text-input w-full' %>
+    <%= form.text_field :url, class: 'text-input w-full', placeholder: 'URL' %>
   </div>
 
   <div class='flex'>
-    <%= form.submit 'Save', class: 'btn btn-primary' %>
+    <%= form.submit 'Save to read later', class: 'btn btn-primary' %>
     <div class='flex-1'></div>
 
     <% if article.persisted? %>

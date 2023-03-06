@@ -1,15 +1,15 @@
 <div class="article flex flex-col mb-6 relative <%= expanded ? 'expanded' : '' %>" data-controller='article-expand hotkeys' data-hotkeys-bindings-value='{"n": "article-expand#readAndNext"}' data-id="<%= article.id %>" data-article-expand-read-value="<%= article.read_status_read? %>" data-article-expand-page-value="<%= page %>">
-  <div class='article-container mx-auto article-width relative border border-transparent hover:border-orange-200 rounded group'>
+  <div class='article-container mx-auto article-width relative border border-transparent hover:border-orange-200 rounded group '>
     
     <%= render 'articles/header', article: article %>
 
 
-    <div class=' mx-auto overflow-hidden relative article-content bg-primary px-6 pb-2 rounded-b' data-article-expand-target='content'>
+    <div class=' mx-auto overflow-hidden relative article-content bg-primary px-6 pb-2 rounded-b dark:bg-zinc-800' data-article-expand-target='content'>
       <div class='excerpt'><%== article.excerpt_or_content %></div>
       <div class='extracted-content hidden pt-6' data-controller='note-create' data-id='<%= article.id %>'><%== article.content %></div>
     </div>
 
-    <div class='expander-overlay absolute bottom-0 left-0 right-0 bg-gradient-to-b from-transparent to-white h-3/4 hidden group-hover:block cursor-pointer rounded-b' data-action="click->article-expand#toggle">
+    <div class='expander-overlay absolute bottom-0 left-0 right-0 bg-gradient-to-b from-transparent to-white h-3/4 hidden group-hover:block cursor-pointer rounded-b dark:to-zinc-900' data-action="click->article-expand#toggle">
       <button class='btn btn-secondary flex items-center shadow mx-auto top-[40%] relative expand-button'>Click to expand</button>
     </div>
   </div>

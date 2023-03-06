@@ -3,7 +3,7 @@ class NotesController < ApplicationController
   before_action :set_note, only: [:show, :edit, :update, :destroy]
 
   def index
-    @notes = Current.user.notes.all.order(:id)
+    @notes_by_article = Current.user.notes.preload(:article).group_by(&:article)
   end
 
   def show

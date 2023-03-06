@@ -38,8 +38,9 @@ class User < ApplicationRecord
   }, _prefix: true
 
   enum preferred_theme: {
-    light: 0,
-    dark: 1,
+    system: 0,
+    light: 1,
+    dark: 2,
   }, _prefix: true
 
   enum preferred_font_size: {

@@ -57,20 +57,14 @@ export default class extends Controller {
 		document.removeEventListener('selectionchange', this.selectionChanged);
 	}
 
-	highlight = () => {
-		const selectedText = this.selection.toString();
-		let node = this.selection.anchorNode;
-		while (node.nodeType === Node.TEXT_NODE) {
-			node = node.parentElement;
-		}
+	wrapRange = (range) => {
+		let startNode = range.startContainer;
+		let endNode = range.endContainer;
 
 		const span = document.createElement('span');
 		span.classList.add('highlighted');
 
 		const inlineElements = ['span', 'a', 'em', 'strong'];
-		const range = this.selection.getRangeAt(0);
-		let startNode = range.startContainer;
-		let endNode = range.endContainer;
 
 		if (startNode.nodeType === Node.TEXT_NODE) {
 			startNode = startNode.parentElement;
@@ -88,38 +82,93 @@ export default class extends Controller {
 
 		range.surroundContents(span);
 
-		this.createNote(span);
+		return span;
+	};
+
+	highlight = () => {
+		const selectedText = this.selection.toString();
+		let node = this.selection.anchorNode;
+		while (node.nodeType === Node.TEXT_NODE) {
+			node = node.parentElement;
+		}
+
+		const selectionRange = this.selection.getRangeAt(0);
+		let startNode = selectionRange.startContainer;
+		let endNode = selectionRange.endContainer;
+
+		let spans = [];
+
+		if (startNode.parentElement !== endNode.parentElement) {
+			let startNode = selectionRange.startContainer;
+			let endNode = selectionRange.endContainer;
+
+			let startParent = startNode.parentElement;
+			let endParent = endNode.parentElement;
+
+			let startOffset = selectionRange.startOffset;
+			let endOffset = selectionRange.endOffset;
+
+			let startRange = document.createRange();
+			let endRange = document.createRange();
+
+			startRange.setStart(startNode, startOffset);
+			startRange.setEnd(startParent, startParent.childNodes.length);
+
+			endRange.setStart(endParent, 0);
+			endRange.setEnd(endNode, endOffset);
+
+			spans.push(this.wrapRange(startRange));
+
+			let parent = startParent.nextElementSibling;
+			while (parent !== endParent) {
+				let range = document.createRange();
+				range.setStart(parent, 0);
+				range.setEnd(parent, parent.childNodes.length);
+				spans.push(this.wrapRange(range));
+				parent = parent.nextElementSibling;
+			}
+
+			spans.push(this.wrapRange(endRange));
+		} else {
+			spans.push(this.wrapRange(selectionRange));
+		}
+
+		this.createNote(spans);
 	};
 
 	removeHighlight = (event) => {
 		const noteNode = findNearsetBlockParent(this.selection.anchorNode);
-		const span = noteNode.querySelector('.highlighted');
+		const spanId = noteNode.querySelector('.highlighted').id;
 
-		const text = span.innerText;
-		const noteId = span.id.split('-')[1];
+		const spans = document.querySelectorAll(`#${spanId}`);
+		spans.forEach((span) => {
+			const text = span.innerText;
+			span.outerHTML = text;
+		});
 
-		span.outerHTML = text;
-
+		const noteId = spanId.split('-')[1];
 		deleteNote(noteId, () => {
 			this.saveArticleContents();
 		});
 	};
 
-	createNote = (span) => {
-		params = {
+	createNote = (spans) => {
+		let text = spans.map((span) => span.innerText).join(' ');
+
+		const params = {
 			note: {
 				article_id: this.element.dataset.id,
-				text: span.innerText,
+				text: text,
 			},
 		};
 		createNote(params, (data) => {
-			span.id = `note-${data.id}`;
+			spans.forEach((span) => (span.id = `note-${data.id}`));
 			this.saveArticleContents();
 		});
 	};
 
 	saveArticleContents = () => {
-		params = {
+		const params = {
 			id: this.element.dataset.id,
 			article: {
 				edited_content: this.element.innerHTML,

@@ -1,5 +1,5 @@
 <div class='article-header top-0 z-10'>
-  <div class='mx-auto bg-primary border-b border-transparent py-2 px-6 rounded-t'>
+  <div class='mx-auto bg-primary border-b border-transparent py-2 px-6 rounded-t dark:bg-zinc-800'>
     <% if article.header_image.attached? %>
       <div class='max-h-[120px] overflow-hidden rounded mb-2 mt-4 article-header-image'>
         <%= image_tag article.header_image, width: '100%', class: 'rounded' %>
@@ -8,7 +8,7 @@
     <div class='flex items-center'>
       <div class='flex-1'>
         <h1 class='text-xl font-bold'><%= article.name %></h1>
-        <div class='flex text-gray-600'>
+        <div class='flex text-gray-600 dark:text-gray-300'>
           <% if article.source.present? %>
             <h2 class='mr-5'><%= link_to article.source.pretty_name, article.url, target: '_blank', rel: 'noopener noreferrer' %></h2>
           <% else %>

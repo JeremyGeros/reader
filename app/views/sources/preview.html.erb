@@ -1,4 +1,4 @@
-<div class='mx-auto bg-white rounded mt-10 article-width p-6'>
+<div class='mx-auto bg-white dark:bg-zinc-800 rounded mt-10 article-width p-6'>
   <h1 class='text-xl font-bold mb-4'>Preview source</h1>
   <div class=''>
     <%= form_with(model: @source, local: true, html: { autocomplete: "off", class: 'w-full'}) do |form| %>
@@ -17,6 +17,7 @@
       <%= render 'articles/list', articles: @source.articles, readerable: true, page: 'preview_source' %>
     <% elsif @source.scan_progress_failed? %>
       <p>Scanning source failed.</p>
+      <%= link_to 'Retry', preview_source_path(@source, rescan: true) %>
     <% else %>
       <div class='article-width mx-auto'>
         <p class='flex items-center justify-center'>

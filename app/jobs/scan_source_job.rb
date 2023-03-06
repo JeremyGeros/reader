@@ -7,15 +7,21 @@ class ScanSourceJob < ApplicationJob
   def perform(source)
     Rails.logger.info "ScanSourceJob: Scanning source #{source.id} #{source.url}"
 
-    url = attempt_to_scan_for_rss(source)
-
-    if url
-      Rails.logger.info "ScanSourceJob: Found RSS feed at #{url}"
-      source.update!(url: url)
+    if source.rss_url.present?
+      Rails.logger.info "ScanSourceJob: Using existing source rss url #{source.rss_url}"
       scan_rss(source)
     else
-      Rails.logger.info "ScanSourceJob: No RSS feed found at #{source.url} scanning using html"
-      scan_html(source)
+      url = attempt_to_scan_for_rss(source)
+
+      if url
+        url = "https://#{URI.parse(source.url).host}#{url}" if url.start_with?("/")
+        Rails.logger.info "ScanSourceJob: Found RSS feed at #{url}"
+        source.update!(rss_url: url)
+        scan_rss(source)
+      else
+        Rails.logger.info "ScanSourceJob: No RSS feed found at #{source.url} scanning using html"
+        scan_html(source)
+      end
     end
 
     source.update!(last_scanned_at: DateTime.now, scan_progress: :complete)
@@ -74,11 +80,30 @@ class ScanSourceJob < ApplicationJob
       end
     end
   
-    parse_name = (parsed_html || Nokogiri::HTML(html_response)).css('title').text
+    nokogiri = (parsed_html || Nokogiri::HTML(html_response))
+    parse_name = nokogiri.css('title').first&.text.strip
     if (source.name == source.url) && parse_name.present?
       Rails.logger.info "ScanSourceJob: Found name #{parse_name} at #{source_url}"
-      source.update!(name: parse_name)
+      source.name = parse_name
     end
+
+    favicon_link = nokogiri.css('link[rel="icon"], link[rel="shortcut icon"]').first
+    if favicon_link
+      favicon_url = favicon_link.attributes["href"].value.strip
+      favicon_url = "https://#{URI.parse(source_url).host}#{favicon_url}" if favicon_url.start_with?("/")
+      Rails.logger.info "ScanSourceJob: Found favicon #{favicon_url} at #{source_url}"
+      source.favicon_url = favicon_url
+    end
+
+    description_tag = nokogiri.css('meta[name="description"], meta[property="og:description"]').first
+    if description_tag
+      Rails.logger.info "ScanSourceJob: Found description #{description_tag.attributes["content"].value.strip}"
+      source.description = description_tag.attributes["content"].value.strip
+    end
+
+    source.save! if source.changed?
+
+    
 
     found_url
   end
@@ -87,7 +112,7 @@ class ScanSourceJob < ApplicationJob
   def scan_rss(source)
     article_limit = source.temporary_at.nil? ? 10 : 3
 
-    URI.open(source.url) do |rss|
+    URI.open(source.rss_url) do |rss|
       feed = RSS::Parser.parse(rss)
       feed.items.each_with_index do |item, index|
         break if index >= article_limit

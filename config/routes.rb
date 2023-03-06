@@ -24,6 +24,8 @@ Rails.application.routes.draw do
   end
 
   resources :users, only: [:edit, :update, :destroy]
+  get 'settings', to: 'users#edit', as: 'settings'
+
 
   get 'external/read_later', to: 'external_articles#read_later', as: 'external_read_later'
 
