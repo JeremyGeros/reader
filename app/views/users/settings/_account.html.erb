@@ -1,0 +1,40 @@
+<%= form_with(model: @user, local: true, html: { autocomplete: "off", class: 'w-full'}) do |form| %>
+  <% if @user.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h2>
+
+      <ul>
+        <% @user.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class='mb-4'>
+    <h1 class='font-bold border-b border-borders dark:border-zinc-600 pb-2 mb-2'>Account Settings</h1>
+
+    <div class='mb-4'>
+      <%= form.label :email %>
+      <%= form.text_field :email, class: 'text-input w-full' %>
+    </div>
+
+    <div class='mb-4'>
+      <%= form.label :password %>
+      <%= form.text_field :password, class: 'text-input w-full' %>
+    </div>
+
+    <div class='mb-4'>
+      <%= form.label :password_confirmation %>
+      <%= form.text_field :password_confirmation, class: 'text-input w-full' %>
+    </div>
+
+    <%= hidden_field_tag 'page', @page %>
+
+    <%= form.submit 'Save', class: 'btn btn-primary' %>
+  </div>
+<% end %>
+
+<div class='h-[1px] bg-borders my-6'></div>
+
+<%= link_to 'Delete my account', user_path(Current.user), class: 'btn btn-danger' %>
