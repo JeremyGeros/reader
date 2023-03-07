@@ -44,10 +44,9 @@ class User < ApplicationRecord
   }, _prefix: true
 
   enum preferred_font_size: {
-    sm: 0,
-    md: 1,
-    lg: 2,
-    xl: 3,
+    md: 0,
+    lg: 1,
+    xl: 2
   }, _prefix: true
 
 

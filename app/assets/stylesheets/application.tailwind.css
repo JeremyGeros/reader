@@ -19,6 +19,19 @@
     
     
   }
+
+  .dark {
+    --color-primary: 20 20 20;
+    --color-primary-dark: 255 255 255;
+
+    --color-secondary: 37 37 37;
+    --color-borders: 37 37 37;
+
+    --color-text: 255 255 255;
+
+    --color-primary-button: 111 140 247;
+    --color-primary-button-color: 255 255 255;
+  }
 }
 
 @layer components {
@@ -156,7 +169,7 @@
 
 
   .page p, .page ul, .page ol {
-    @apply mb-3 text-lg;
+    @apply mb-3;
   }
 
   .page {
@@ -173,6 +186,10 @@
 
   .dark .page p > code {
     @apply bg-zinc-600 text-white;
+  }
+
+  .page .highlighted code > *, .page .highlighted code::target-text {
+    @apply bg-yellow-100;
   }
 
   .page h1, .page h2, .page h3 {
@@ -222,6 +239,7 @@
   .dark .highlighted {
     @apply bg-yellow-400 text-text;
   }
+
 }
 
 @import 'actiontext.css';

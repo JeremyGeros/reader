@@ -20,7 +20,7 @@ module ApplicationHelper
   end
 
   def preference_classes
-    "#{preferred_size_class} #{preferred_code_style_class} #{preferred_font_class} #{preferred_font_size_class}"
+    "#{preferred_size_class} #{preferred_code_style_class} #{preferred_font_class}"
   end
 
    def preferred_size_class
@@ -44,7 +44,8 @@ module ApplicationHelper
   end
 
   def preferred_font_size_class
-    font_size = Current.user&.preferred_font_size || "md"
+    font_size = Current.user&.preferred_font_size || "base"
+    font_size = "base" if font_size == "md"
     "text-#{font_size}"
   end
 end

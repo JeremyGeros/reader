@@ -2,6 +2,21 @@ import { Controller } from '@hotwired/stimulus';
 import { createPopper, showPoppper, hidePopper } from '../utils/popper';
 import { createNote, deleteNote, updateArticle } from '../utils/api';
 
+const blockElements = [
+	'p',
+	'div',
+	'ol',
+	'ul',
+	'pre',
+	'blockquote',
+	'h1',
+	'h2',
+	'h3',
+	'h4',
+	'h5',
+	'h6',
+];
+
 function getSelected() {
 	if (window.getSelection) {
 		return window.getSelection();
@@ -13,7 +28,6 @@ function getSelected() {
 }
 
 function findNearsetBlockParent(element) {
-	const blockElements = ['p', 'div', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6'];
 	let node = element;
 
 	while (node.nodeType === Node.TEXT_NODE) {
@@ -22,6 +36,24 @@ function findNearsetBlockParent(element) {
 
 	while (!blockElements.includes(node.nodeName.toLowerCase())) {
 		node = node.parentElement;
+	}
+
+	return node;
+}
+
+// Recursively find the first block element without children block elements
+function findFirstBlockElementWithoutBlockChild(node) {
+	if (blockElements.includes(node.nodeName.toLowerCase())) {
+		if (node.childNodes.length === 0) {
+			return node;
+		}
+
+		for (let i = 0; i < node.childNodes.length; i++) {
+			const child = node.childNodes[i];
+			if (blockElements.includes(child.nodeName.toLowerCase())) {
+				return findFirstBlockElementWithoutBlockChild(child);
+			}
+		}
 	}
 
 	return node;
@@ -120,12 +152,29 @@ export default class extends Controller {
 			spans.push(this.wrapRange(startRange));
 
 			let parent = startParent.nextElementSibling;
+			if (blockElements.includes(parent.nodeName.toLowerCase())) {
+				parent = findFirstBlockElementWithoutBlockChild(parent);
+			}
+
+			let previousParent = startParent;
 			while (parent !== endParent) {
 				let range = document.createRange();
 				range.setStart(parent, 0);
 				range.setEnd(parent, parent.childNodes.length);
 				spans.push(this.wrapRange(range));
+
+				while (
+					parent.nextElementSibling === null &&
+					parent.parentElement !== null
+				) {
+					parent = parent.parentElement;
+				}
+				previousParent = parent;
 				parent = parent.nextElementSibling;
+			}
+
+			if (blockElements.includes(parent.nodeName.toLowerCase())) {
+				parent = findFirstBlockElementWithoutBlockChild(parent);
 			}
 
 			spans.push(this.wrapRange(endRange));
@@ -142,8 +191,8 @@ export default class extends Controller {
 
 		const spans = document.querySelectorAll(`#${spanId}`);
 		spans.forEach((span) => {
-			const text = span.innerText;
-			span.outerHTML = text;
+			const html = span.innerHTML;
+			span.outerHTML = html;
 		});
 
 		const noteId = spanId.split('-')[1];
