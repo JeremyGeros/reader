@@ -24,21 +24,6 @@ module.exports = {
 				sans: ['Whitney A', 'Whitney B', ...defaultTheme.fontFamily.sans],
 				serif: ['Sentinel A', 'Sentinel B', ...defaultTheme.fontFamily.serif],
 			},
-
-			colors: {
-				primary: 'rgb(var(--color-primary) / <alpha-value>)',
-				secondary: 'rgb(var(--color-secondary) / <alpha-value>)',
-				borders: 'rgb(var(--color-borders) / <alpha-value>)',
-
-				text: 'rgb(var(--color-text) / <alpha-value>)',
-
-				'primary-button': 'rgb(var(--color-primary-button) / <alpha-value>)',
-				'primary-button-hover':
-					'rgb(var(--color-primary-button-hover) / <alpha-value>)',
-				'primary-button-color':
-					'rgb(var(--color-primary-button-color) / <alpha-value>)',
-			},
-
 			textShadow: {
 				sm: '0 1px 2px var(--tw-shadow-color)',
 				DEFAULT: '0 2px 4px var(--tw-shadow-color)',

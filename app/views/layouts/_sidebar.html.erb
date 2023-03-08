@@ -1,20 +1,20 @@
 <% if Current.user %>
-  <div class='flex flex-col h-screen py-3 px-3 z-10 bg-primary border-r border-borders w-[13%] dark:bg-zinc-800 dark:border-zinc-600'>
+  <div class='flex flex-col h-screen py-3 px-3 z-10 bg-white border-r border-zinc-200 w-[13%] dark:bg-zinc-800 dark:border-zinc-700'>
     <div class='flex flex-col flex-1 gap-2'>
       <%= link_to root_path, class: 'font-serif font-bold text-3xl py-6 lg:px-5 px-10' do %>
         <span class=''>FEED</span>
         <span class='text-yellow-500 -ml-1'>ME</span>
       <% end %>
-      <%= link_to '🌎 All', feed_all_path, class: "btn hover:bg-primary-button/20 #{nav_active('feeds', 'all')}" %>
-      <%= link_to '🖨 Sources', feed_feeds_path, class: "btn hover:bg-primary-button/20 #{nav_active('feeds', 'feeds')}" %>
-      <%= link_to '⏳ Read later', feed_read_later_path, class: "btn hover:bg-primary-button/20 #{nav_active('feeds', 'read_later')}" %>
-      <%= link_to '📖 Notes', notes_path, class: "btn hover:bg-primary-button/20 #{nav_active('notes')}" %>
+      <%= link_to '🌎 All', feed_all_path, class: "btn hover:bg-violet-500/20 #{nav_active('feeds', 'all')}" %>
+      <%= link_to '🖨 Sources', feed_feeds_path, class: "btn hover:bg-violet-500/20 #{nav_active('feeds', 'feeds')}" %>
+      <%= link_to '⏳ Read later', feed_read_later_path, class: "btn hover:bg-violet-500/20 #{nav_active('feeds', 'read_later')}" %>
+      <%= link_to '📖 Notes', notes_path, class: "btn hover:bg-violet-500/20 #{nav_active('notes')}" %>
 
-      <div class='h-[1px] bg-borders my-4 dark:bg-zinc-600'></div>
-      <%= link_to '📦 Read', feed_read_path, class: "btn hover:bg-primary-button/20 #{nav_active('feeds', 'read')}" %>
-      <%= link_to '📬 Sources', sources_path, class: "btn hover:bg-primary-button/20 #{nav_active('sources')}" %>
-      <%= link_to '📨 Save an article', new_article_path, class: "btn hover:bg-primary-button/20 #{nav_active('articles', 'new')}" %>
-      <%= link_to '🔧 Settings', settings_path, class: "btn hover:bg-primary-button/20 #{nav_active('users', 'edit')}" %>
+      <div class='divider'></div>
+      <%= link_to '📦 Read', feed_read_path, class: "btn hover:bg-violet-500/20 #{nav_active('feeds', 'read')}" %>
+      <%= link_to '📬 Sources', sources_path, class: "btn hover:bg-violet-500/20 #{nav_active('sources')}" %>
+      <%= link_to '📨 Save an article', new_article_path, class: "btn hover:bg-violet-500/20 #{nav_active('articles', 'new')}" %>
+      <%= link_to '🔧 Settings', settings_path, class: "btn hover:bg-violet-500/20 #{nav_active('users', 'edit')}" %>
     </div>
 
     <div class='flex flex-col'>

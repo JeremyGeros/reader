@@ -12,21 +12,21 @@
   <% end %>
 
   <div class='mb-4'>
-    <h1 class='font-bold border-b border-borders dark:border-zinc-600 pb-2 mb-2'>Appearence</h1>
+    <h1 class='font-bold text-xl pb-2 mb-2'>Appearence</h1>
 
     <div class='mb-4'>
       <%= form.label :preferred_theme, 'Theme' %>
-      <%= form.select :preferred_theme, options_for_select(['system', 'light', 'dark'], @user.preferred_theme), class: 'text-input w-full' %>
+      <%= form.select :preferred_theme, options_for_select([['System', 'system'], ['Light', 'light'], ['Dark', 'dark']], @user.preferred_theme), {}, class: 'text-input w-full' %>
     </div>
 
     <div class='mb-4'>
       <%= form.label :preferred_code_style, 'Code Style' %>
-      <%= form.select :preferred_code_style, options_for_select(['dimmed', 'bright', 'dark'], @user.preferred_code_style), class: 'text-input w-full' %>
+      <%= form.select :preferred_code_style, options_for_select([['Dimmed', 'dimmed'], ['Light', 'bright'], ['Dark', 'dark']], @user.preferred_code_style), {}, class: 'text-input w-full' %>
     </div>
 
     <div class='mb-4'>
       <%= form.label :preferred_font_size, 'Font Size' %>
-      <%= form.select :preferred_font_size, options_for_select(['sm', 'md', 'lg', 'xl'], @user.preferred_font_size), class: 'text-input w-full' %>
+      <%= form.select :preferred_font_size, options_for_select([['Small', 'sm'], ['Default', 'md'], ['Large', 'lg'], ['Extra Large', 'xl']], @user.preferred_font_size), {}, class: 'text-input w-full' %>
     </div>
 
     <%= hidden_field_tag 'page', @page %>

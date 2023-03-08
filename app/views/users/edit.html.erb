@@ -1,6 +1,6 @@
 <%= turbo_frame_tag "edit_user" do %>
   <div class='mx-auto bg-white dark:bg-zinc-800 rounded shadow mt-10 w-2/3  flex'>
-    <div class='flex flex-col bg-secondary p-6 border-l border-borders w-1/4 pt-15 gap-4'>
+    <div class='flex flex-col bg-zinc-100 p-6 border-r border-zinc-200 w-1/4 pt-15 gap-4 dark:bg-zinc-800 dark:border-zinc-700'>
       <%= link_to '🏛 Account', settings_path(page: :account), class: "btn hover:bg-primary-button/20 text-lg #{class_if(@page == 'account', 'nav-active')}" %>
       <%= link_to '🎨 Appearance', settings_path(page: :appearance), class: "btn hover:bg-primary-button/20 text-lg #{class_if(@page == 'appearance', 'nav-active')}" %>
     </div>

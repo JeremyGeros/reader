@@ -1,3 +1,40 @@
-<h1>Edit Source</h1>
+<div class='mx-auto bg-white dark:bg-zinc-800 rounded shadow mt-10 w-1/2 p-6'>
+  <h1 class='text-xl font-bold mb-4'>Edit Source</h1>
+  <%= form_with(model: @source, local: true, html: { autocomplete: "off", class: 'w-full'}) do |form| %>
+    <% if @source.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= pluralize(@source.errors.count, "error") %> prohibited this source from being saved:</h2>
 
-<%= render 'form', source: @source %>
+        <ul>
+          <% @source.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <div class='mb-4'>
+      <%= form.label :name %>
+      <%= form.text_field :name, class: 'text-input w-full' %>
+    </div>
+
+    <div class='mb-4'>
+      <%= form.label :url, 'Base url of the site' %>
+      <%= form.text_field :url, class: 'text-input w-full' %>
+
+      <div class='italic text-gray-500 mt-2'>Enter the base url of the site you want to add. For example: <span class='text-green-500'>https://benui.ca</span> not the url of a specific article if you want to add just a single article use the read later feature. Sources with rss feeds will work best, but you can add any website and we will do our best to extract the articles.</div>
+    </div>
+
+    <div class='mb-4'>
+      <%= form.label :scan_interval, 'Scanning interval' %>
+      <%= form.select :scan_interval, options_for_select(Source.scan_intervals.map {|interval| [interval[0].titleize, interval[0]]}, @source.scan_interval), {}, class: 'text-input w-full' %>
+
+      <div class='italic text-gray-500 mt-2'>This will determine how often we re scan the source for new articles, to pause adding of new articles from a source without deleting it, select never.</div>
+    </div>
+
+    <div class='flex'>
+      <div class='flex-1'></div>
+      <%= form.submit 'Update', class: 'btn btn-primary' %>
+    </div>
+  <% end %>
+</div>

@@ -31,7 +31,6 @@ class Source < ApplicationRecord
     weekly: 2,
     monthly: 3,
     never: 4,
-    always: 5,
   }
 
   before_validation :set_defaults
@@ -50,8 +49,6 @@ class Source < ApplicationRecord
       1.week
     when 'monthly'
       1.month
-    else
-      1.second
     end
   end
 

@@ -2,41 +2,9 @@
 @tailwind components;
 @tailwind utilities;
 
-@layer base {
-  :root {
-    --color-primary: 255 255 255;
-    --color-primary-dark: 20 20 20;
-
-    --color-secondary: 247 247 247;
-    --color-borders: 237 237 240;
-
-    --color-text: 23 22 24;
-
-    /* --color-tertiary: 239 239 239; */
-    
-    --color-primary-button: 37 90 245;
-    --color-primary-button-color: 255 255 255;
-    
-    
-  }
-
-  .dark {
-    --color-primary: 20 20 20;
-    --color-primary-dark: 255 255 255;
-
-    --color-secondary: 37 37 37;
-    --color-borders: 37 37 37;
-
-    --color-text: 255 255 255;
-
-    --color-primary-button: 111 140 247;
-    --color-primary-button-color: 255 255 255;
-  }
-}
-
 @layer components {
   .btn {
-    @apply text-text py-2 px-4 rounded cursor-pointer dark:text-white;
+    @apply text-neutral-900 py-2 px-4 rounded cursor-pointer dark:text-white;
   }
 
   .btn-small {
@@ -44,15 +12,15 @@
   }
 
   .btn-primary {
-    @apply bg-primary-button text-primary-button-color;
+    @apply bg-violet-500 text-white;
   }
 
   .btn-primary:hover {
-    @apply bg-primary-button/80;
+    @apply bg-violet-500/80;
   }
 
   .btn-secondary {
-    @apply bg-gray-100 text-text px-2 py-1 flex items-center dark:bg-zinc-700 dark:text-white;
+    @apply bg-gray-100 text-neutral-900 px-2 py-1 flex items-center dark:bg-zinc-700 dark:text-white;
   }
 
   .btn-secondary:hover {
@@ -60,11 +28,11 @@
   }
 
   .btn-danger {
-    @apply bg-red-700/60;
+    @apply bg-red-600 text-white;
   }
 
   .btn-danger:hover {
-    @apply bg-red-800;
+    @apply bg-red-500;
   }
 
   .btn-link {
@@ -76,24 +44,28 @@
   }
 
   .text-input {
-    @apply block rounded px-2 py-2 bg-white border border-zinc-300 text-gray-900 outline-none dark:bg-zinc-700 dark:text-white dark:border-zinc-600;
+    @apply block rounded px-2 py-2 bg-white border border-zinc-200 text-gray-900 outline-none dark:bg-zinc-700 dark:text-white dark:border-zinc-700;
   }
 
+
   .text-input:focus {
-    @apply ring ring-blue-500 border-blue-100;
+    @apply ring ring-violet-500 border-violet-100 dark:border-violet-900;
   }
 
   .divider {
-    @apply h-px bg-zinc-700;
+    @apply h-px bg-zinc-200 dark:bg-zinc-700;
   }
 
   .nav-active {
-    @apply text-primary bg-primary-button;
+    @apply text-white bg-violet-500;
   }
 
   .nav-active:hover {
-    @apply text-primary-button-color !bg-primary-button;
+    @apply text-white !bg-violet-500;
   }
+
+
+  /* Article expanding controls */
 
   .article.expanded .floating-controls {
     @apply block;
@@ -108,7 +80,7 @@
   }
 
   .article.expanded .article-header > div {
-    @apply border-borders dark:border-zinc-600
+    @apply border-zinc-200 dark:border-zinc-700
   }
 
   .article.expanded .expander-overlay, .article.expanded:hover .expander-overlay {
@@ -168,6 +140,8 @@
   }
 
 
+  /* Readability page controls */
+
   .page p, .page ul, .page ol {
     @apply mb-3;
   }
@@ -188,7 +162,7 @@
     @apply bg-zinc-600 text-white;
   }
 
-  .page .highlighted code > *, .page .highlighted code::target-text {
+  .page .highlighted code > * {
     @apply bg-yellow-100;
   }
 
@@ -232,14 +206,16 @@
     @apply hidden;
   }
 
+
+
+  /* Highlight of notes */
   .highlighted {
     @apply bg-yellow-100 scroll-mt-40;
   }
 
   .dark .highlighted {
-    @apply bg-yellow-400 text-text;
+    @apply bg-yellow-400 text-neutral-900;
   }
-
 }
 
 @import 'actiontext.css';

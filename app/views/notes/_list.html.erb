@@ -18,7 +18,7 @@
 
     <div class='mt-2'>
       <% notes.each do |note| %>
-        <div class='border-t border-borders first:pt-0 first:mt-3 pt-3 mt-3 first:border-none dark:border-zinc-600'>
+        <div class='border-t border-zinc-200 first:pt-0 first:mt-3 pt-3 mt-3 first:border-none dark:border-zinc-700'>
           <%= link_to note.text, article_path(note.article, anchor: note.hash_link), class: 'highlighted', data: { turbo: "false" } %>
         </div>
       <% end %>
