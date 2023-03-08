@@ -1,4 +1,6 @@
 require 'csv'
+require 'nokogiri'
+
 class Import < ApplicationRecord
   belongs_to :user
 
@@ -12,7 +14,6 @@ class Import < ApplicationRecord
   enum import_type: {
     instapaper: 0,
     pocket: 1,
-    readwise: 2,
   }
 
   enum status: {
@@ -40,8 +41,6 @@ class Import < ApplicationRecord
       import_instapaper
     when 'pocket'
       import_pocket
-    when 'readwise'
-      import_readwise
     end
 
     rows.each do |row|
@@ -50,7 +49,7 @@ class Import < ApplicationRecord
       article = user.articles.new(url: row['url'])
       article.name = row['name']
       article.published_at = row['published_at']
-      article.starred = row['starred']
+      article.starred = row['starred'] || false
       article.read_status = :read if row['starred']
       article.user = user
       article.import = self
@@ -78,6 +77,25 @@ class Import < ApplicationRecord
       }
     end
 
+    rows
+  end
+
+  # Import from Pocket html export file (https://getpocket.com/export)
+  def import_pocket
+    debugger
+    unread_ul = Nokogiri::HTML(self.file.download).css('ul').first
+
+    rows = []
+
+    unread_ul.css('li').each do |li|
+      a = li.css('a').first
+
+      rows << {
+        'name' => a.text,
+        'url' => a['href'],
+        'published_at' => a['time_added'],
+      }
+    end
     rows
   end
 end

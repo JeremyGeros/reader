@@ -26,7 +26,7 @@
             Import Failed
           </h2>
           <p>There was an error importing your data, please try again later. </p>
-          <p class='mt-2 text-gray-400'><%= @import.failed_message %></p>
+          <p class='mt-2 text-gray-600 dark:text-gray-300'><%= @import.failed_message %></p>
         </div>
       <% elsif @import.imported? %>
         <div>

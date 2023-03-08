@@ -37,4 +37,9 @@
 
 <div class='divider my-6'></div>
 
-<%= link_to 'Delete my account', user_path(Current.user), class: 'btn btn-danger' %>
+<div class=''>
+  <h1 class='font-bold text-xl'>Delete Account</h1>
+
+  <div class='italic text-gray-600 dark:text-gray-300 my-4'>Delete your account and all your data, this cannot be undone.</div>
+  <%= link_to 'Delete my account', user_path(Current.user), class: 'btn btn-danger', data: { "turbo-method": :delete, turbo_confirm: 'Are you sure you wish to delete your account, this will delete everything and log you out?' } %>
+</div>

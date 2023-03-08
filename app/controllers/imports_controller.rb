@@ -13,7 +13,7 @@ class ImportsController < ApplicationController
     @import = Current.user.imports.new(import_params)
     @import.save!
 
-    if ImportJob.perform_later(@import)
+    if ImportJob.perform_later(@import) 
       redirect_to import_path(@import)
     else
       @previous_imports = Current.user.imports.all.order(created_at: :desc)

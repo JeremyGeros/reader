@@ -8,6 +8,7 @@ export default class extends Controller {
 	}
 
 	connect() {
+		console.log('import chec');
 		clearTimeout(this.importCheckTimeout);
 		this.importCheckTimeout = setTimeout(() => {
 			this.checkStatus();
@@ -27,7 +28,7 @@ export default class extends Controller {
 			.then((response) => {
 				if (response.ok) {
 					response.json().then((data) => {
-						if (data.status === 'complete') {
+						if (data.status === 'complete' || data.status === 'failed') {
 							window.location.reload();
 							return;
 						} else {

@@ -1,4 +1,4 @@
-<div class='flex flex-col bg-zinc-100 p-6 border-r border-zinc-200 w-1/4 pt-15 gap-4 dark:bg-zinc-800 dark:border-zinc-700'>
+<div class='flex flex-col bg-zinc-100 p-6 border-r border-zinc-200 w-1/4 pt-15 gap-4 dark:bg-zinc-800 dark:border-zinc-700 rounded-l'>
   <%= link_to '🏛 Account', settings_path(page: :account), class: "btn hover:bg-violet-500/20 text-lg #{class_if(@page == 'account', 'nav-active')}", data: { 'turbo-action' => "replace" } %>
   <%= link_to '🎨 Appearance', settings_path(page: :appearance), class: "btn hover:bg-violet-500/20 text-lg #{class_if(@page == 'appearance', 'nav-active')}", data: { 'turbo-action' => "replace" } %>
   <%= link_to '🚆 Import', imports_path(page: :imports), class: "btn hover:bg-violet-500/20 text-lg #{nav_active('imports')}", data: { 'turbo-action' => "replace" } %>

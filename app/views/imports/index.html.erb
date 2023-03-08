@@ -1,10 +1,10 @@
 <%= turbo_frame_tag "edit_user" do %>
-  <div class='mx-auto bg-white dark:bg-zinc-800 rounded shadow mt-10 w-2/3  flex'>
+  <div class='mx-auto bg-white dark:bg-zinc-800 rounded shadow my-10 w-2/3  flex'>
     <%= render 'users/settings/sidebar' %>
     <div class='flex-1 p-6'>
       <h1 class='font-bold text-xl pb-2 mb-2'>Import</h1>
 
-      <p class='italic text-gray-500'>
+      <p class='italic text-gray-600 dark:text-gray-300'>
         Bring your articles from instpaper or pocket. We will only import articles from instpaper that are unread or starred. We will only import articles from pocket that are unread.
       </p>
 
@@ -12,14 +12,14 @@
 
       <%= form_with model: @import, local: true, multipart: true, html: { autocomplete: "off" } do |form| %>
         <h1 class='font-bold text-xl pb-2 mb-2'>Instapaper CSV</h1>
-        <p class='italic text-gray-500'>
+        <p class='italic text-gray-600 dark:text-gray-300'>
           You can export your articles from instpaper by going to <a href='https://www.instapaper.com/user' target='_blank'>https://www.instapaper.com/user</a> scrolling down to the export section and clicking on the <strong>Download .CSV file</strong>
         </p>
 
-        <div class='flex flex-col mt-6 mb-6'>
+        <div class='flex flex-col mt-6'>
           <%= form.label :file, 'CSV' %>
           <%= form.file_field :file, required: true, class: 'text-input' %>
-        <div>
+        </div>
 
         <%= hidden_field_tag 'import[import_type]', 'instapaper' %>
 
@@ -29,25 +29,27 @@
       <div class='divider my-6'></div>
 
       <%= form_with model: @import, local: true, multipart: true, html: { autocomplete: "off" } do |form| %>
-        <h1 class='font-bold text-xl pb-2 mb-2'>Pocket CSV</h1>
-        <p class='italic text-gray-500'>
-          
+        <h1 class='font-bold text-xl pb-2 mb-2'>Pocket HTML</h1>
+        <p class='italic text-gray-600 dark:text-gray-300'>
+          You can export your articles from pocket by going to <a href='https://getpocket.com/export' target='_blank'>https://getpocket.com/export</a> and clicking on the <strong>Export HTML file</strong> button
         </p>
 
-        <div class='flex flex-col mt-6 mb-6'>
-          <%= form.label :file, 'CSV' %>
-          <%= form.file_field :file %>
-        <div>
+        <div class='flex flex-col mt-6'>
+          <%= form.label :file, 'HTML File' %>
+          <%= form.file_field :file, required: true, class: 'text-input' %>
+        </div>
 
-        <%= form.submit 'Import', class: 'btn btn-primary mt-6' %>
+        <%= hidden_field_tag 'import[import_type]', 'pocket' %>
+
+        <%= form.submit 'Import from pocket', class: 'btn btn-primary mt-6' %>
       <% end %>
 
       <div class='divider my-6'></div>
       <h1 class='font-bold text-xl pb-2 mb-2'>Previously imported</h1>
-      <ul>
+      <ul class='flex flex-col gap-1'>
         <% @previous_imports.each do |import| %>
           <li>
-            <%= link_to import_path(import), data: { 'turbo-action' => "replace" }, class: 'flex items-center' do %>
+            <%= link_to import_path(import), data: { 'turbo-action' => "replace" }, class: 'flex items-center btn btn-link p-0' do %>
               <% if import.pending? || import.processing? %>
                 <svg class="animate-spin -ml-1 mr-2 h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
                   <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
