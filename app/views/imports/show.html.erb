@@ -1,0 +1,45 @@
+<%= turbo_frame_tag "edit_user" do %>
+  <div class='mx-auto bg-white dark:bg-zinc-800 rounded shadow mt-10 w-2/3  flex'>
+    <%= render 'users/settings/sidebar' %>
+    <div class='flex-1 p-6'>
+      <h1 class='font-bold text-xl pb-2 mb-2'><%= @import.name %></h1>
+
+
+      <% if @import.pending? || @import.processing? %>
+        <div data-controller='import-check' data-import-check-import-value="<%= @import.id %>">
+          <h2 class='font-bold mb-2 flex items-center'>
+            <svg class="animate-spin -ml-1 mr-2 h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+              <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+              <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+            </svg>
+            Import in Progress
+          </h2>
+          <p>You import is in progress this page will update when it is complete, you can leave this page and come back later.</p>
+        </div>
+      <% elsif @import.failed? %>
+        <div>
+          <h2 class='font-bold mb-2 flex items-center'>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="-ml-1 mr-2 h-5 w-5 text-red-500">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126zM12 15.75h.007v.008H12v-.008z" />
+            </svg>
+
+            Import Failed
+          </h2>
+          <p>There was an error importing your data, please try again later. </p>
+          <p class='mt-2 text-gray-400'><%= @import.failed_message %></p>
+        </div>
+      <% elsif @import.imported? %>
+        <div>
+          <h2 class='font-bold mb-2 flex items-center'>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="-ml-1 mr-2 h-5 w-5 text-green-500">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+
+            Import completed
+          </h2>
+          <p>Imported <%= pluralize(@import.articles_count, 'article') %> it may take some time for all of the articles to appear.</p>
+        </div>
+      <% end %>
+    </div>
+  </div>
+<% end %>
