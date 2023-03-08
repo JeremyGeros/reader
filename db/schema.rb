@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_03_06_162742) do
+ActiveRecord::Schema[7.0].define(version: 2023_03_08_160952) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -71,8 +71,22 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_06_162742) do
     t.datetime "published_at"
     t.integer "ttr", default: 0, null: false
     t.text "edited_content"
+    t.bigint "import_id"
+    t.boolean "starred", default: false, null: false
     t.index ["source_id"], name: "index_articles_on_source_id"
     t.index ["user_id"], name: "index_articles_on_user_id"
+  end
+
+  create_table "imports", force: :cascade do |t|
+    t.string "name"
+    t.bigint "user_id", null: false
+    t.integer "import_from"
+    t.integer "status", default: 0, null: false
+    t.integer "articles_count"
+    t.string "failed_message"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_imports_on_user_id"
   end
 
   create_table "notes", force: :cascade do |t|
@@ -129,6 +143,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_06_162742) do
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "articles", "sources"
   add_foreign_key "articles", "users"
+  add_foreign_key "imports", "users"
   add_foreign_key "notes", "articles"
   add_foreign_key "notes", "users"
   add_foreign_key "sources", "users"

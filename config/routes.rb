@@ -26,6 +26,10 @@ Rails.application.routes.draw do
   resources :users, only: [:edit, :update, :destroy]
   get 'settings', to: 'users#edit', as: 'settings'
 
+  resources :imports, only: [:index, :show, :create] do
+    get 'status', on: :member
+  end
+
 
   get 'external/read_later', to: 'external_articles#read_later', as: 'external_read_later'
 

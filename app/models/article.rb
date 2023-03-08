@@ -5,6 +5,7 @@ class Article < ApplicationRecord
 
   belongs_to :source, optional: true
   belongs_to :user
+  belongs_to :import, optional: true
 
   has_many :notes, dependent: :destroy, inverse_of: :article
 
@@ -16,7 +17,7 @@ class Article < ApplicationRecord
   validates :url, presence: true
 
   after_commit :parse
-  after_commit :read_later_save, on: :create
+  after_commit :read_later_save_delayed, on: :create
 
   # Most recent scope either by coalcesed published_at or created_at
   scope :most_recent, -> { order(Arel.sql('COALESCE(articles.published_at, articles.created_at) DESC')) }
@@ -47,6 +48,10 @@ class Article < ApplicationRecord
         filename: "#{id}.html"
       )
     end
+  end
+
+  def read_later_save_delayed
+    ReadLaterSaveJob.perform_later(self)
   end
 
   def content
