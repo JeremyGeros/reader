@@ -1,1 +1,3 @@
-Pagy::DEFAULT[:items] = 100
+require 'pagy/extras/support'
+
+Pagy::DEFAULT[:items] = 15

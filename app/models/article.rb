@@ -23,6 +23,7 @@ class Article < ApplicationRecord
   scope :most_recent, -> { order(Arel.sql('COALESCE(articles.published_at, articles.created_at) DESC')) }
 
   scope :ready, -> { where(parse_progress: :complete).left_outer_joins(:source).where('articles.source_id IS NULL or sources.temporary_at IS NULL') }
+  scope :common_preloads, -> { with_attached_header_image.with_attached_favicon.preload(source: { favicon_attachment: :blob }) }
   
   enum parse_progress: {
     not_started: 0,

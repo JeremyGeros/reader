@@ -1,0 +1,11 @@
+<turbo-stream action="append" target="posts">
+  <template>
+    <%= render partial: "articles/show", collection: @articles, as: :article, formats: [:html], locals: { expanded: false, page: @page } %>
+  </template>
+</turbo-stream>
+
+<turbo-stream action="update" target="pagination">
+  <template>
+    <%== pagy_next_link(@pagy) %>
+  </template>
+</turbo-stream>

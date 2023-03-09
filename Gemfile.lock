@@ -217,8 +217,7 @@ GEM
       racc (~> 1.4)
     nokogiri (1.14.2-x86_64-linux)
       racc (~> 1.4)
-    pagy (5.10.1)
-      activesupport
+    pagy (6.0.2)
     pg (1.4.5)
     pg_query (2.2.1)
       google-protobuf (>= 3.19.2)
