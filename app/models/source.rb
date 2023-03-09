@@ -14,6 +14,7 @@ class Source < ApplicationRecord
 
   scope :ready, -> { where(scan_progress: :complete) }
   scope :not_preview, -> { where(temporary_at: nil) }
+  scope :common_preloads, -> { with_attached_favicon.with_rich_text_description}
 
   after_commit :scan, on: :create
 
@@ -32,6 +33,7 @@ class Source < ApplicationRecord
     monthly: 3,
     never: 4,
   }
+
 
   before_validation :set_defaults
 

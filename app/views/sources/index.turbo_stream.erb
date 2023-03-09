@@ -1,0 +1,11 @@
+<turbo-stream action="append" target="sources">
+  <template>
+    <%= render partial: "sources/item", collection: @sources, as: :source, formats: [:html], locals: { extra_classes: '' } %>
+  </template>
+</turbo-stream>
+
+<turbo-stream action="update" target="pagination">
+  <template>
+    <%== pagy_next_link(@pagy) %>
+  </template>
+</turbo-stream>

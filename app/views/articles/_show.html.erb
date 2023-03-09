@@ -1,4 +1,4 @@
-<div class="article flex flex-col mb-6 relative <%= expanded ? 'expanded' : '' %>" data-controller='article-expand hotkeys' data-hotkeys-bindings-value='{"n": "article-expand#readAndNext"}' data-id="<%= article.id %>" data-article-expand-read-value="<%= article.read_status_read? %>" data-article-expand-page-value="<%= page %>">
+<div class="article flex flex-col mb-6 relative <%= expanded ? 'expanded' : '' %>" data-controller='article-expand' data-id="<%= article.id %>" data-article-expand-read-value="<%= article.read_status_read? %>" data-article-expand-page-value="<%= page %>">
   <div class='article-container mx-auto article-width relative border border-transparent hover:border-orange-200 rounded group '>
     
     <%= render 'articles/header', article: article %>
@@ -14,7 +14,7 @@
     </div>
   </div>
 
-  <div class='undo-button hidden absolute top-0 left-0 bottom-0 right-0 bg-white bg-opacity-50 items-center  mx-auto article-width rounded'>
+  <div class='undo-button hidden absolute top-0 left-0 bottom-0 right-0 bg-white bg-opacity-50 items-center  mx-auto article-width rounded dark:bg-transparent'>
     <button class='btn btn-secondary flex items-center mx-auto shadow' data-action="article-expand#undoRead">
       <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 mr-1">
         <path stroke-linecap="round" stroke-linejoin="round" d="M15 15l-6 6m0 0l-6-6m6 6V9a6 6 0 0112 0v3" />

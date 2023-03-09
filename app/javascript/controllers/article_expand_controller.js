@@ -1,5 +1,6 @@
 import { Controller } from '@hotwired/stimulus';
 import { updateArticle } from '../utils/api';
+import hotkeys from 'hotkeys-js';
 
 export default class extends Controller {
 	static targets = ['content', 'button'];
@@ -9,6 +10,16 @@ export default class extends Controller {
 		page: String,
 	};
 
+	connect() {
+		hotkeys('j', this.readAndNext);
+		// hotkeys('k', this.readAndPrevious);
+	}
+
+	disconnect() {
+		hotkeys.unbind('j');
+		// hotkeys.unbind('k');
+	}
+
 	toggle() {
 		if (this.element.classList.contains('expanded')) {
 			this.element.classList.remove('expanded');
@@ -17,7 +28,7 @@ export default class extends Controller {
 		}
 	}
 
-	readAndNext(e) {
+	readAndNext = (e) => {
 		e.preventDefault();
 
 		if (this.element.classList.contains('expanded')) {
@@ -34,9 +45,9 @@ export default class extends Controller {
 				this.element.nextElementSibling?.scrollIntoView();
 			}, 0);
 		}
-	}
+	};
 
-	undoRead(e) {
+	undoRead = (e) => {
 		e.preventDefault();
 
 		if (this.readValue === true) {
@@ -52,5 +63,5 @@ export default class extends Controller {
 				}
 			}, 0);
 		}
-	}
+	};
 }

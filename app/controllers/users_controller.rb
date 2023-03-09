@@ -32,7 +32,7 @@ class UsersController < ApplicationController
     end
 
     def user_params
-      params.require(:user).permit(:email, :password, :password_confirmation, :time_zone, :preferred_size, :preferred_code_style, :preferred_font, :preferred_theme, :preferred_font_size)
+      params.require(:user).permit(:email, :password, :password_confirmation, :time_zone, :preferred_size, :preferred_code_style, :preferred_font, :preferred_theme, :preferred_font_size, :sidebar_collapsed)
     end
 
     def set_page

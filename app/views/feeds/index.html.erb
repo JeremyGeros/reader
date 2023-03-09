@@ -1,12 +1,8 @@
 
 <div class='py-6 px-10' data-controller='infinite-scroll'>
-  <div id="posts">
+  <div id="articles">
     <%= render 'articles/list', articles: @articles, readerable: true, page: @page %>
   </div>
 
-  <div data-infinite-scroll-target='scrollArea'></div>
-
-  <div id='pagination' class='hidden' data-infinite-scroll-target="pagination">
-    <%== pagy_next_link(@pagy) %>
-  </div>
+  <%= render 'layouts/infinite_scroll_pagination' %>
 </div>

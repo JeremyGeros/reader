@@ -5,17 +5,20 @@
     <%= link_to 'New source', new_source_path, class: 'btn btn-secondary' %>
   </div>
 
-  <div class='flex gap-4 flex-col'>
-    <% if @sources.any? %>
+  <% if @sources.any? %>
+    <div class='flex gap-4 flex-col' data-controller='infinite-scroll'>
+      <div id='sources'>
       <% @sources.each do |source| %>
         <%= render 'sources/item', source: source, extra_classes: '' %>
       <% end %>
-    <% else %>
-      <div class='mx-auto w-2/3 text-center mt-10'>
-        <p class='mb-2'>Sources are websites you want to read articles from. You have added any sources yet <%= link_to 'add one now', new_source_path, class: 'btn btn-link' %>.</p>
 
-        <p class='italic text-gray-600 dark:text-gray-300'>Sources with rss feeds will work best, but you can add any website and we will do our best to extract the articles.</p>
-      </div>
-    <% end %>
-  </div>
+      <%= render 'layouts/infinite_scroll_pagination' %>
+    </div>
+  <% else %>
+    <div class='mx-auto w-2/3 text-center mt-10'>
+      <p class='mb-2'>Sources are websites you want to read articles from. You have added any sources yet <%= link_to 'add one now', new_source_path, class: 'btn btn-link' %>.</p>
+
+      <p class='italic text-gray-600 dark:text-gray-300'>Sources with rss feeds will work best, but you can add any website and we will do our best to extract the articles.</p>
+    </div>
+  <% end %>
 </div>

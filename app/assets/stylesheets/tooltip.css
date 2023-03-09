@@ -8,6 +8,11 @@
   z-index: 10000;
 }
 
+.dark #tooltip {
+  background: #444;
+  color: white;
+}
+
 #tooltip[data-show] {
   display: block;
 }

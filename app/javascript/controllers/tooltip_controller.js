@@ -6,7 +6,10 @@ const hideEvents = ['mouseleave', 'blur'];
 
 export default class extends Controller {
 	connect() {
-		this.popper = createPopper(this.element, 'bottom');
+		this.popper = createPopper(
+			this.element,
+			this.element.dataset.tooltipPlacement || 'bottom'
+		);
 
 		showEvents.forEach((event) => {
 			this.element.addEventListener(event, this.show);
@@ -18,7 +21,14 @@ export default class extends Controller {
 	}
 
 	show = () => {
-		showPoppper(this.popper, this.element.dataset.tooltip);
+		if (
+			!this.element.dataset.tooltipRequiredClass ||
+			document.documentElement.classList.contains(
+				this.element.dataset.tooltipRequiredClass
+			)
+		) {
+			showPoppper(this.popper, this.element.dataset.tooltip);
+		}
 	};
 
 	hide = () => {

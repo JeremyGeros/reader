@@ -1,4 +1,4 @@
-<turbo-stream action="append" target="posts">
+<turbo-stream action="append" target="articles">
   <template>
     <%= render partial: "articles/show", collection: @articles, as: :article, formats: [:html], locals: { expanded: false, page: @page } %>
   </template>

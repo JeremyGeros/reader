@@ -1,23 +1,47 @@
 <% if Current.user %>
-  <div class='flex flex-col h-screen py-3 px-3 z-10 bg-white border-r border-zinc-200 w-[13%] dark:bg-zinc-800 dark:border-zinc-700'>
+  <div class='flex flex-col h-screen py-3 px-3 z-10 bg-white border-r border-zinc-200 w-[13%] dark:bg-zinc-800 dark:border-zinc-700 main-sidebar'>
     <div class='flex flex-col flex-1 gap-2'>
       <%= link_to root_path, class: 'font-serif font-bold text-3xl pt-2 pb-4 flex mx-auto flex-col' do %>
         <span class=''>Paper</span>
         <span class='text-yellow-500'>Stack</span>
       <% end %>
-      <%= link_to '🌎 All', root_path, class: "btn hover:bg-violet-500/20 #{nav_active('feeds', 'all')}" %>
-      <%= link_to '🖨 Sources', feed_feeds_path, class: "btn hover:bg-violet-500/20 #{nav_active('feeds', 'feeds')}" %>
-      <%= link_to '⏳ Read later', feed_read_later_path, class: "btn hover:bg-violet-500/20 #{nav_active('feeds', 'read_later')}" %>
-      <%= link_to '📖 Notes', notes_path, class: "btn hover:bg-violet-500/20 #{nav_active('notes')}" %>
+      <%= link_to root_path, class: "btn hover:bg-violet-500/20 px-3 #{nav_active('feeds', 'all')}", data: { 'controller': 'tooltip', tooltip: 'All', 'tooltip-placement' => 'right', 'tooltip-required-class' => 'sidebar-collapsed' } do %>
+        <span class='sidebar-link-emoji mr-1'>🌎</span>
+        <span class='sidebar-link-text'>All</span>
+      <% end %>
+      <%= link_to feed_feeds_path, class: "btn hover:bg-violet-500/20 px-3 #{nav_active('feeds', 'feeds')}", data: { 'controller': 'tooltip', tooltip: 'Sources', 'tooltip-placement' => 'right', 'tooltip-required-class' => 'sidebar-collapsed' } do %>
+        <span class='sidebar-link-emoji mr-1'>🖨</span>
+        <span class='sidebar-link-text'>Sources</span>
+      <% end %>
+      <%= link_to feed_read_later_path, class: "btn hover:bg-violet-500/20 px-3 #{nav_active('feeds', 'read_later')}", data: { 'controller': 'tooltip', tooltip: 'Read later', 'tooltip-placement' => 'right', 'tooltip-required-class' => 'sidebar-collapsed' } do %>
+        <span class='sidebar-link-emoji mr-1'>⏳</span>
+        <span class='sidebar-link-text'>Read later</span>
+      <% end %>
+      <%= link_to notes_path, class: "btn hover:bg-violet-500/20 px-3 #{nav_active('notes')}", data: { 'controller': 'tooltip', tooltip: 'Notes', 'tooltip-placement' => 'right', 'tooltip-required-class' => 'sidebar-collapsed' } do %>
+        <span class='sidebar-link-emoji mr-1'>📖</span>
+        <span class='sidebar-link-text'>Notes</span>
+      <% end %>
 
       <div class='divider'></div>
-      <%= link_to '📦 Read', feed_read_path, class: "btn hover:bg-violet-500/20 #{nav_active('feeds', 'read')}" %>
-      <%= link_to '📬 Sources', sources_path, class: "btn hover:bg-violet-500/20 #{nav_active('sources')}" %>
-      <%= link_to '📨 Save an article', new_article_path, class: "btn hover:bg-violet-500/20 #{nav_active('articles', 'new')}" %>
-      <%= link_to '🔧 Settings', settings_path, class: "btn hover:bg-violet-500/20 #{nav_active('users', 'edit')}" %>
+      <%= link_to feed_read_path, class: "btn hover:bg-violet-500/20 px-3 #{nav_active('feeds', 'read')}", data: { 'controller': 'tooltip', tooltip: 'Read', 'tooltip-placement' => 'right', 'tooltip-required-class' => 'sidebar-collapsed' } do %>
+        <span class='sidebar-link-emoji mr-1'>📦</span>
+        <span class='sidebar-link-text'>Read</span>
+      <% end %>
+      <%= link_to sources_path, class: "btn hover:bg-violet-500/20 px-3 #{nav_active('sources')}", data: { 'controller': 'tooltip', tooltip: 'Sources', 'tooltip-placement' => 'right', 'tooltip-required-class' => 'sidebar-collapsed' } do %>
+        <span class='sidebar-link-emoji mr-1'>📬</span>
+        <span class='sidebar-link-text'>Sources</span>
+      <% end %>
+      <%= link_to new_article_path, class: "btn hover:bg-violet-500/20 px-3 #{nav_active('articles', 'new')}", data: { 'controller': 'tooltip', tooltip: 'Save an article', 'tooltip-placement' => 'right', 'tooltip-required-class' => 'sidebar-collapsed' } do %>
+        <span class='sidebar-link-emoji mr-1'>📨</span>
+        <span class='sidebar-link-text'>Save an article</span>
+      <% end %>
+      <%= link_to settings_path, class: "btn hover:bg-violet-500/20 px-3 #{nav_active('users', 'edit')}", data: { 'controller': 'tooltip', tooltip: 'Settings', 'tooltip-placement' => 'right', 'tooltip-required-class' => 'sidebar-collapsed' } do %>
+        <span class='sidebar-link-emoji mr-1'>🔧</span>
+        <span class='sidebar-link-text'>Settings</span>
+      <% end %>
     </div>
 
-    <div class='flex flex-col'>
+    <div class='flex flex-col secondary-buttons'>
       <%= render 'layouts/viewport_select' %>
     
       <%= link_to 'Log Out', logout_path, class: "btn btn-link text-center" %>

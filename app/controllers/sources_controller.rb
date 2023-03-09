@@ -3,7 +3,12 @@ class SourcesController < ApplicationController
   before_action :set_source, only: [:show, :edit, :preview, :update, :destroy, :scan]
 
   def index
-    @sources = Current.user.sources.not_preview.order(:name)
+    @pagy, @sources = pagy(Current.user.sources.not_preview.order(:name).common_preloads)
+
+    respond_to do |format|
+      format.html
+      format.turbo_stream
+    end
   end
 
   def show

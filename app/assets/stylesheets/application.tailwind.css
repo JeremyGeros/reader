@@ -140,6 +140,23 @@
   }
 
 
+  /* Sidebar */
+  .sidebar-collapsed .main-sidebar {
+    @apply w-[65px] overflow-hidden;
+  }
+
+  .sidebar-collapsed .main-sidebar .btn {
+    @apply p-2 flex justify-center;
+  }
+
+  .sidebar-collapsed .sidebar-link-emoji {
+    @apply !mr-0;
+  }
+
+  .sidebar-collapsed .sidebar-link-text, .sidebar-collapsed .main-sidebar .secondary-buttons {
+    @apply hidden;
+  }
+
   /* Readability page controls */
 
   .page p, .page ul, .page ol {
