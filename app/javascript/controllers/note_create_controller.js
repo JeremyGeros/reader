@@ -1,6 +1,6 @@
 import { Controller } from '@hotwired/stimulus';
-import { createPopper, showPoppper, hidePopper } from 'utils/popper';
-import { createNote, deleteNote, updateArticle } from 'utils/api';
+import { createPopper, showPoppper, hidePopper } from 'utils/popper.js';
+import { createNote, deleteNote, updateArticle } from 'utils/api.js';
 
 const blockElements = [
 	'p',

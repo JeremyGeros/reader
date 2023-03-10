@@ -1,5 +1,5 @@
 import { Controller } from '@hotwired/stimulus';
-import { updateArticle } from '../utils/api';
+import { updateArticle } from 'utils/api.js';
 import hotkeys from 'hotkeys-js';
 
 export default class extends Controller {

@@ -1,5 +1,5 @@
 import { Controller } from '@hotwired/stimulus';
-import { createPopper, showPoppper, hidePopper } from '../utils/popper';
+import { createPopper, showPoppper, hidePopper } from 'utils/popper.js';
 
 const showEvents = ['mouseenter', 'focus'];
 const hideEvents = ['mouseleave', 'blur'];

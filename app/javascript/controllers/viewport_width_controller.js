@@ -1,5 +1,5 @@
 import { Controller } from '@hotwired/stimulus';
-import { updateUser } from '../utils/api';
+import { updateUser } from 'utils/api.js';
 
 const sizes = ['small', 'medium', 'large', 'xlarge', 'full'];
 
