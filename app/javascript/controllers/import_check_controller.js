@@ -27,7 +27,7 @@ export default class extends Controller {
 		})
 			.then((response) => {
 				if (response.ok) {
-					response.json().then((data) => {
+					responseon().then((data) => {
 						if (data.status === 'complete' || data.status === 'failed') {
 							window.location.reload();
 							return;
