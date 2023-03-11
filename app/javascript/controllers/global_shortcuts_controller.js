@@ -8,6 +8,7 @@ export default class extends Controller {
 	connect() {
 		hotkeys('m', this.toggleTheme);
 		hotkeys('n', this.toggleSidebar);
+		hotkeys('/', this.toggleKeyboardShortcuts);
 
 		hotkeys('shift+=', this.fontSizeUp);
 		hotkeys('shift+-', this.fontSizeDown);
@@ -44,6 +45,13 @@ export default class extends Controller {
 		});
 
 		document.documentElement.classList.toggle('sidebar-collapsed');
+	};
+
+	toggleKeyboardShortcuts = (e) => {
+		e.preventDefault();
+		document.querySelectorAll('#keyboard-shortcuts').forEach((el) => {
+			el.click();
+		});
 	};
 
 	changeFontSize = (up) => {

@@ -9,9 +9,9 @@
 
 <div id='hotkeys' class=' fixed bottom-4 right-4'>
   <div class='' data-controller='modal-button' data-modal-button-modal-outlet='#modal'>
-    <div class='btn rounded-full bg-zinc-200 px-2 flex justify-center shadow hover:bg-zinc-300 hover:text-orange-600' data-action="click->modal-button#open">
+    <div id='keyboard-shortcuts' class='btn btn-secondary rounded-full bg-zinc-200 p-2 flex justify-center shadow' data-action="click->modal-button#open">
       <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
-        <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 5.25a3 3 0 013 3m3 0a6 6 0 01-7.029 5.912c-.563-.097-1.159.026-1.563.43L10.5 17.25H8.25v2.25H6v2.25H2.25v-2.818c0-.597.237-1.17.659-1.591l6.499-6.499c.404-.404.527-1 .43-1.563A6 6 0 1121.75 8.25z" />
+        <path stroke-linecap="round" stroke-linejoin="round" d="M4.26 10.147a60.436 60.436 0 00-.491 6.347A48.627 48.627 0 0112 20.904a48.627 48.627 0 018.232-4.41 60.46 60.46 0 00-.491-6.347m-15.482 0a50.57 50.57 0 00-2.658-.813A59.905 59.905 0 0112 3.493a59.902 59.902 0 0110.399 5.84c-.896.248-1.783.52-2.658.814m-15.482 0A50.697 50.697 0 0112 13.489a50.702 50.702 0 017.74-3.342M6.75 15a.75.75 0 100-1.5.75.75 0 000 1.5zm0 0v-3.675A55.378 55.378 0 0112 8.443m-7.007 11.55A5.981 5.981 0 006.75 15.75v-1.5" />
       </svg>
     </div>
 
@@ -19,26 +19,32 @@
       <%= modal_content do %>
         <div class=''>
           <div class="">
-            <h3 class="text-lg leading-6 font-medium text-gray-900 border-b border-zinc-200 p-3 flex items-center" id="modal-title">
+            <h3 class="text-lg leading-6 font-medium text-gray-900 dark:text-white dark:border-zinc-600 border-b border-zinc-200 p-2 flex items-center" id="modal-title">
               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4 mr-1">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 5.25a3 3 0 013 3m3 0a6 6 0 01-7.029 5.912c-.563-.097-1.159.026-1.563.43L10.5 17.25H8.25v2.25H6v2.25H2.25v-2.818c0-.597.237-1.17.659-1.591l6.499-6.499c.404-.404.527-1 .43-1.563A6 6 0 1121.75 8.25z" />
+                <path stroke-linecap="round" stroke-linejoin="round" d="M4.26 10.147a60.436 60.436 0 00-.491 6.347A48.627 48.627 0 0112 20.904a48.627 48.627 0 018.232-4.41 60.46 60.46 0 00-.491-6.347m-15.482 0a50.57 50.57 0 00-2.658-.813A59.905 59.905 0 0112 3.493a59.902 59.902 0 0110.399 5.84c-.896.248-1.783.52-2.658.814m-15.482 0A50.697 50.697 0 0112 13.489a50.702 50.702 0 017.74-3.342M6.75 15a.75.75 0 100-1.5.75.75 0 000 1.5zm0 0v-3.675A55.378 55.378 0 0112 8.443m-7.007 11.55A5.981 5.981 0 006.75 15.75v-1.5" />
               </svg>
+
               Keyboard Shortcuts
             </h3>
             <div class="p-3">
               <div class='flex flex-col gap-2'>
-                <div class='flex items-center'><span class='px-2 py-0 mr-2 rounded border border-zinc-200 uppercase font-mono text-gray-600'>k</span> Next Article</div>
+                <div class='grid grid-cols-2 grid-rows-2 gap-1'>
+                  <div class='flex items-center'><span class='px-1.5 py-0 text-sm mr-2 rounded border border-zinc-200 uppercase font-mono text-gray-600 dark:text-white'>k</span> Next Article</div>
 
-                <div class='flex items-center'><span class='px-2 py-0 mr-2 rounded border border-zinc-200 uppercase font-mono text-gray-600'>?</span> Show this help</div>
-                <div class='flex items-center'><span class='px-2 py-0 mr-2 rounded border border-zinc-200 uppercase font-mono text-gray-600'>m</span> Toggle Dark/Light Mode</div>
-                <div class='flex items-center'><span class='px-2 py-0 mr-2 rounded border border-zinc-200 uppercase font-mono text-gray-600'>n</span> Toggle Sidebar</div>
+                  <div class='flex items-center'><span class='px-1.5 py-0 text-sm mr-2 rounded border border-zinc-200 uppercase font-mono text-gray-600 dark:text-white'>?</span> Show this help</div>
+                  <div class='flex items-center'><span class='px-1.5 py-0 text-sm mr-2 rounded border border-zinc-200 uppercase font-mono text-gray-600 dark:text-white'>m</span> Toggle Dark/Light Mode</div>
+                  <div class='flex items-center'><span class='px-1.5 py-0 text-sm mr-2 rounded border border-zinc-200 uppercase font-mono text-gray-600 dark:text-white'>n</span> Toggle Sidebar</div>
+                </div>
 
-                <div class='flex items-center'><span class='px-2 py-0 mr-2 rounded border border-zinc-200 uppercase font-mono text-gray-600'>+</span> Increase Article Width</div>
-                <div class='flex items-center'><span class='px-2 py-0 mr-2 rounded border border-zinc-200 uppercase font-mono text-gray-600'>-</span> Decrease Article Width</div>
+                <div class='grid grid-cols-2 grid-rows-2 gap-1 mt-2'>
+                  <div class='flex items-center'><span class='px-1.5 py-0 text-sm mr-2 rounded border border-zinc-200 uppercase font-mono text-gray-600 dark:text-white'>+</span> Increase Article Width</div>
 
-                <div class='flex items-center'><span class='px-2 py-0 mr-0.5 rounded border border-zinc-200 uppercase font-mono text-gray-600'>SHIFT</span><span class='px-2 py-0 mr-2 rounded border border-zinc-200 uppercase font-mono text-gray-600'>+</span> Increase Font Size</div>
-                <div class='flex items-center'><span class='px-2 py-0 mr-0.5 rounded border border-zinc-200 uppercase font-mono text-gray-600'>SHIFT</span>
-                <span class='px-2 py-0 mr-2 rounded border border-zinc-200 uppercase font-mono text-gray-600'>-</span> Decrease Font Size</div>
+                  <div class='flex items-center'><span class='px-1.5 py-0 text-sm mr-1.5 rounded border border-zinc-200 uppercase font-mono text-gray-600 dark:text-white'>SHIFT</span><span class='px-1.5 py-0 text-sm mr-2 rounded border border-zinc-200 uppercase font-mono text-gray-600 dark:text-white'>+</span> Increase Font Size</div>
+                  <div class='flex items-center'><span class='px-1.5 py-0 text-sm mr-2 rounded border border-zinc-200 uppercase font-mono text-gray-600 dark:text-white'>-</span> Decrease Article Width</div>
+
+                  <div class='flex items-center'><span class='px-1.5 py-0 text-sm mr-1.5 rounded border border-zinc-200 uppercase font-mono text-gray-600 dark:text-white'>SHIFT</span>
+                  <span class='px-1.5 py-0 text-sm mr-2 rounded border border-zinc-200 uppercase font-mono text-gray-600 dark:text-white'>-</span> Decrease Font Size</div>
+                </div>
               </div>
             </div>
           </div>
