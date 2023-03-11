@@ -139,6 +139,22 @@
     @apply text-gray-400 hover:bg-gray-100 hover:border-gray-300 cursor-not-allowed;
   }
 
+  .content-text-sm .font-affected-content {
+    @apply text-sm;
+  }
+
+  .content-text-base .font-affected-content {
+    @apply text-base;
+  }
+
+  .content-text-lg .font-affected-content {
+    @apply text-lg;
+  }
+
+  .content-text-xl .font-affected-content {
+    @apply text-xl;
+  }
+
 
   /* Sidebar */
   .sidebar-collapsed .main-sidebar {

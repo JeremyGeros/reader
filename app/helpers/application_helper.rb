@@ -20,7 +20,7 @@ module ApplicationHelper
   end
 
   def preference_classes
-    "#{preferred_size_class} #{preferred_code_style_class} #{preferred_font_class} #{sidebar_collapsed}"
+    "#{preferred_size_class} #{preferred_code_style_class} #{preferred_font_class} #{sidebar_collapsed} #{preferred_font_size_class}"
   end
 
    def preferred_size_class
@@ -46,7 +46,7 @@ module ApplicationHelper
   def preferred_font_size_class
     font_size = Current.user&.preferred_font_size || "base"
     font_size = "base" if font_size == "md"
-    "text-#{font_size}"
+    "content-text-#{font_size}"
   end
 
   def sidebar_collapsed

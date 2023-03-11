@@ -11,12 +11,12 @@ export default class extends Controller {
 	};
 
 	connect() {
-		hotkeys('j', this.readAndNext);
+		hotkeys('k', this.readAndNext);
 		// hotkeys('k', this.readAndPrevious);
 	}
 
 	disconnect() {
-		hotkeys.unbind('j');
+		hotkeys.unbind('k');
 		// hotkeys.unbind('k');
 	}
 
