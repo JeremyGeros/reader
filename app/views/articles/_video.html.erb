@@ -1,0 +1,22 @@
+<div class='excerpt'><%== article.excerpt_or_content %></div>
+<div class='extracted-content hidden pt-6' data-id='<%= article.id %>'>
+  <div class='mb-4'>
+    <iframe src="https://<%= article.content %>" frameborder='0' allowfullscreen='allowfullscreen' class='w-full h-auto aspect-video' modestbranding="1" color="white"></iframe>
+    <div class='bg-zinc-100 p-4 rounded-b items-center dark:bg-zinc-700'>
+      <div class='flex'>
+        <div class='flex-1'>
+          <h3 class='font-bold text-lg'><%= article.name %></h3>
+          <h4><%= article.byline %> <span class='ml-1 text-gray-600 dark:text-gray-300'><%= seconds_to_display(article.ttr) %></span></h4>
+        </div>
+
+        <div class=''>
+          <%= image_tag article.favicon, class: 'w-10 h-10 rounded' if article.favicon.attached? %>
+        </div>
+      </div>
+
+      <div class='mt-2'><%= article.excerpt %></div>
+    </div>
+
+    
+  </div>
+</div>
