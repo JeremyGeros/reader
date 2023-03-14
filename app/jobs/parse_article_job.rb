@@ -7,6 +7,20 @@ class ParseArticleJob < ApplicationJob
     Rails.logger.info "ApplicationJob: ActiveStorage::Current.host = #{ActiveStorage::Current.host}"
     Rails.logger.info "ParseArticleJob: Parsing article #{article.id} #{article.url} #{article.raw_html.attached?}"
 
+    if is_video?(article.url)
+      video_parse(article)
+    else
+      article_parse(article)
+    end
+
+    
+  rescue => e
+    Rails.logger.info "ParseArticleJob: #{e}"
+    article.update!(parse_progress: :failed)
+    raise e if Rails.env.development?
+  end
+
+  def article_parse(article)
     output = `node lib/article_parse.js #{article.url} #{article.raw_html.url} #{article.id}`
 
     output = output.strip
@@ -34,9 +48,28 @@ class ParseArticleJob < ApplicationJob
       header_image_url: readability["image"]&.strip,
       parse_progress: :complete,
     )
-  rescue => e
-    Rails.logger.info "ParseArticleJob: #{e}"
-    article.update!(parse_progress: :failed)
-    raise e if Rails.env.development?
+  end
+
+  def is_video?(url)
+    url = URI.parse(url)
+    url.host.include?("youtube.com") || url.host.include?("youtu.be") || url.host.include?("vimeo.com")
+  end
+
+  def video_parse(article)
+    video = VideoInfo.new(article.url)
+
+    article.name = video.title if article.name.blank?
+    article.excerpt = video.description if article.excerpt.blank?
+    article.header_image_url = video.thumbnail_large unless article.header_image.attached?
+    article.extracted_content = video.embed_url
+    article.extracted_text = video.description
+    article.ttr = video.duration
+    article.byline = video.author
+    article.favicon_url = video.author_thumbnail unless article.favicon.attached?
+    article.kind = :video
+
+    article.update!(
+      parse_progress: :complete,
+    )
   end
 end

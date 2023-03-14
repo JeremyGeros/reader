@@ -1,5 +1,5 @@
-<%= turbo_frame_tag "new_article" do %>
-  <div class='mx-auto bg-white dark:bg-zinc-800 rounded shadow mt-10 w-1/2 p-6'>
+<%= render 'layouts/modal' do %>
+  <div class='bg-white dark:bg-zinc-800 shadow p-6'>
     <h1 class='text-xl font-bold mb-4'>Save an article</h1>
 
     <%= render 'form', article: @article %>

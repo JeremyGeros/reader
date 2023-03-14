@@ -5,8 +5,12 @@
 
 
     <div class=' mx-auto overflow-hidden relative article-content bg-white px-6 pb-2 rounded-b dark:bg-zinc-800 font-affected-content' data-article-expand-target='content'>
-      <div class='excerpt'><%== article.excerpt_or_content %></div>
-      <div class='extracted-content hidden pt-6' data-controller='note-create' data-id='<%= article.id %>'><%== article.content %></div>
+      <% case article.kind %>
+      <% when 'video' %>
+        <%= render 'articles/video', article: article %>
+      <% else %>
+        <%= render 'articles/content', article: article %>
+      <% end %>
     </div>
 
     <div class='expander-overlay absolute bottom-0 left-0 right-0 bg-gradient-to-b from-transparent to-white h-3/4 hidden group-hover:block cursor-pointer rounded-b dark:to-zinc-900' data-action="click->article-expand#toggle">

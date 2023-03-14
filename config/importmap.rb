@@ -8,6 +8,6 @@ pin_all_from "app/javascript/controllers", under: "controllers"
 pin "trix"
 pin "@rails/actiontext", to: "actiontext.js"
 pin "@tailwindcss/line-clamp", to: "https://ga.jspm.io/npm:@tailwindcss/line-clamp@0.4.0/src/index.js"
-pin "tailwindcss/plugin", to: "https://ga.jspm.io/npm:tailwindcss@3.1.6/plugin.js"
+pin "tailwindcss/plugin", to: "https://ga.jspm.io/npm:tailwindcss@3.2.7plugin.js"
 pin "hotkeys-js", to: "https://ga.jspm.io/npm:hotkeys-js@3.10.1/dist/hotkeys.esm.js"
 pin_all_from "app/javascript/utils", under: "utils", preload: true

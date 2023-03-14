@@ -1,9 +1,7 @@
 module ModalHelper
 
-  def modal
-    content_tag :div, class: 'hidden', tabindex: -1, role: 'dialog' do
-      yield
-    end
+  def modal(block)
+    # , &block
   end
 
   # def modal_header
@@ -12,9 +10,9 @@ module ModalHelper
   #   end
   # end
 
-  def modal_content
-    content_tag :div, data: { "modal-button-target" => 'content' } do
-      yield
-    end
-  end
+  # def modal_content
+  #   content_tag :div, data: { "modal-button-target" => 'content' } do
+  #     yield
+  #   end
+  # end
 end

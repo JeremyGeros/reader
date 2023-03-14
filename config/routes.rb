@@ -6,6 +6,8 @@ Rails.application.routes.draw do
   get '/feeds', to: 'feeds#feeds', as: 'feed_feeds'
   get '/read_later', to: 'feeds#read_later', as: 'feed_read_later'
   get '/read', to: 'feeds#read', as: 'feed_read'
+
+  get '/keyboard_shortcuts', to: 'feeds#keyboard_shortcuts', as: 'keyboard_shortcuts'
   
   resources :articles do
     member do

@@ -68,6 +68,8 @@ GEM
       tzinfo (~> 2.0)
     addressable (2.8.1)
       public_suffix (>= 2.0.2, < 6.0)
+    ansi (1.5.0)
+    ast (2.4.2)
     aws-eventstream (1.2.0)
     aws-partitions (1.672.0)
     aws-sdk-core (3.168.3)
@@ -176,6 +178,7 @@ GEM
     io-console (0.6.0)
     irb (1.6.2)
       reline (>= 0.3.0)
+    iso8601 (0.13.0)
     jbuilder (2.11.5)
       actionview (>= 5.0.0)
       activesupport (>= 5.0.0)
@@ -212,11 +215,15 @@ GEM
       timeout
     net-smtp (0.3.3)
       net-protocol
+    net_http_timeout_errors (1.0.0)
     nio4r (2.5.8)
     nokogiri (1.14.2-x86_64-darwin)
       racc (~> 1.4)
     nokogiri (1.14.2-x86_64-linux)
       racc (~> 1.4)
+    oga (3.4)
+      ast
+      ruby-ll (~> 2.1)
     pagy (6.0.2)
     pg (1.4.5)
     pg_query (2.2.1)
@@ -266,6 +273,9 @@ GEM
     rexml (3.2.5)
     rss (0.2.9)
       rexml
+    ruby-ll (2.1.2)
+      ansi
+      ast
     ruby-vips (2.1.4)
       ffi (~> 1.12)
     ruby2_keywords (0.0.5)
@@ -304,6 +314,10 @@ GEM
     unf (0.1.4)
       unf_ext
     unf_ext (0.0.8.2)
+    video_info (4.0.0)
+      iso8601 (~> 0.13.0)
+      net_http_timeout_errors (~> 1.0.0)
+      oga (~> 3.4)
     web-console (4.2.0)
       actionview (>= 6.0.0)
       activemodel (>= 6.0.0)
@@ -360,6 +374,7 @@ DEPENDENCIES
   tailwindcss-rails
   turbo-rails
   tzinfo-data
+  video_info
   web-console
   webdrivers
   whenever

@@ -63,6 +63,7 @@ gem 'nokogiri'
 
 gem 'execjs'
 gem 'rss'
+gem 'video_info'
 
 gem 'whenever', require: false
 

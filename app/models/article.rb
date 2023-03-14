@@ -38,6 +38,12 @@ class Article < ApplicationRecord
     deleted: 3,
   }, _prefix: true
 
+  enum kind: {
+    article: 0,
+    video: 1,
+    twitter: 2,
+  }
+
   def display_date
     published_at || created_at
   end

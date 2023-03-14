@@ -52,4 +52,16 @@ module ApplicationHelper
   def sidebar_collapsed
     (Current.user&.sidebar_collapsed || false) ? 'sidebar-collapsed' : ''
   end
+
+  def seconds_to_display(total_seconds)
+    seconds = total_seconds % 60
+    minutes = (total_seconds / 60) % 60
+    hours = total_seconds / (60 * 60)
+
+    return "#{seconds} seconds" if hours == 0 && minutes == 0
+    
+    format("%d:%02d", minutes, seconds) if hours == 0
+
+    format("%d:%02d:%02d", hours, minutes, seconds)
+  end
 end

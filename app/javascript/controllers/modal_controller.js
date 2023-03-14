@@ -14,9 +14,7 @@ const openingClasses = ['opacity-100', 'translate-y-0', 'sm:scale-100'];
 export default class extends Controller {
 	static targets = ['modal', 'backdrop'];
 
-	open(contentHTML) {
-		this.modalTarget.innerHTML = contentHTML;
-
+	connect() {
 		this.backdropTarget.classList.remove('hidden');
 		this.element.classList.add('open');
 		this.modalTarget.classList.add(...openClasses);
@@ -32,6 +30,8 @@ export default class extends Controller {
 		this.element.classList.add('hidden');
 		this.modalTarget.classList.remove(...openClasses);
 		this.modalTarget.classList.remove(...openingClasses);
+		this.element.parentElement.removeAttribute('src');
+		this.element.remove();
 	}
 
 	closeOnBackdropClick(e) {

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_03_09_165437) do
+ActiveRecord::Schema[7.0].define(version: 2023_03_13_174612) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -73,6 +73,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_09_165437) do
     t.text "edited_content"
     t.bigint "import_id"
     t.boolean "starred", default: false, null: false
+    t.integer "kind", default: 0, null: false
     t.index ["source_id"], name: "index_articles_on_source_id"
     t.index ["user_id"], name: "index_articles_on_user_id"
   end

@@ -34,4 +34,7 @@ class FeedsController < ApplicationController
     index
   end
 
+  def keyboard_shortcuts
+  end
+
 end

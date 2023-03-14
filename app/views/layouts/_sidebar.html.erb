@@ -31,7 +31,7 @@
         <span class='sidebar-link-emoji mr-1'>📬</span>
         <span class='sidebar-link-text'>Sources</span>
       <% end %>
-      <%= link_to new_article_path, class: "btn hover:bg-violet-500/20 px-3 #{nav_active('articles', 'new')}", data: { 'controller': 'tooltip', tooltip: 'Save an article', 'tooltip-placement' => 'right', 'tooltip-required-class' => 'sidebar-collapsed' } do %>
+      <%= link_to new_article_path, class: "btn hover:bg-violet-500/20 px-3 #{nav_active('articles', 'new')}", data: { 'controller': 'tooltip', tooltip: 'Save an article', 'tooltip-placement' => 'right', 'tooltip-required-class' => 'sidebar-collapsed', turbo_frame: 'modal' } do %>
         <span class='sidebar-link-emoji mr-1'>📨</span>
         <span class='sidebar-link-text'>Save an article</span>
       <% end %>
