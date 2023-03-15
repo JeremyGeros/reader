@@ -40,7 +40,7 @@ module ApplicationHelper
 
   def preferred_font_class
     font = Current.user&.preferred_font || "default"
-    "font-#{font}"
+    "reading-font-#{font}"
   end
 
   def preferred_font_size_class

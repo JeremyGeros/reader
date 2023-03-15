@@ -155,6 +155,34 @@
     @apply text-xl;
   }
 
+  .reading-font-default .font-affected-content {
+    @apply font-serif;
+  }
+
+  .reading-font-system .font-affected-content {
+    @apply font-system;
+  }
+
+  .reading-font-whitney .font-affected-content {
+    @apply font-whitney;
+  }
+
+  .reading-font-sentinel .font-affected-content {
+    @apply font-sentinel;
+  }
+
+    .reading-font-mercury .font-affected-content {
+      @apply font-mercury;
+    }
+
+    .reading-font-chronicle .font-affected-content {
+      @apply font-chronicle;
+    }
+
+    .reading-font-archer .font-affected-content {
+      @apply font-archer;
+    }
+
 
   /* Sidebar */
   .sidebar-collapsed .main-sidebar {

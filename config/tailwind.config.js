@@ -22,7 +22,27 @@ module.exports = {
 		extend: {
 			fontFamily: {
 				sans: ['Whitney A', 'Whitney B', ...defaultTheme.fontFamily.sans],
-				serif: ['Sentinel A', 'Sentinel B', ...defaultTheme.fontFamily.serif],
+				serif: [
+					'Mercury Text A',
+					'Mercury Text B',
+					...defaultTheme.fontFamily.serif,
+				],
+
+				system: ['ui-serif', 'system-ui', ...defaultTheme.fontFamily.serif],
+				whitney: ['Whitney A', 'Whitney B', ...defaultTheme.fontFamily.sans],
+				sentinel: ['Sentinel', 'Sentinel B', ...defaultTheme.fontFamily.serif],
+
+				mercury: [
+					'Mercury Display A',
+					'Mercury Display B',
+					...defaultTheme.fontFamily.serif,
+				],
+				chronicle: [
+					'Chronicle Display A',
+					'Chronicle Display B',
+					...defaultTheme.fontFamily.serif,
+				],
+				archer: ['Archer A', 'Archer B', ...defaultTheme.fontFamily.serif],
 			},
 			textShadow: {
 				sm: '0 1px 2px var(--tw-shadow-color)',

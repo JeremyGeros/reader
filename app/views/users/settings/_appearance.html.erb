@@ -29,6 +29,11 @@
       <%= form.select :preferred_font_size, options_for_select([['Small', 'sm'], ['Default', 'md'], ['Large', 'lg'], ['Extra Large', 'xl']], @user.preferred_font_size), {}, class: 'text-input w-full' %>
     </div>
 
+    <div class='mb-4'>
+      <%= form.label :preferred_font, 'Font' %>
+      <%= form.select :preferred_font, options_for_select(User.preferred_fonts.keys, @user.preferred_font), {}, class: 'text-input w-full' %>
+    </div>
+
     <%= hidden_field_tag 'page', @page %>
     <%= form.submit 'Save', class: 'btn btn-primary' %>
   </div>

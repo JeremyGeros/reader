@@ -356,6 +356,7 @@ DEPENDENCIES
   importmap-rails
   jbuilder
   kredis
+  loofah
   nokogiri
   pagy
   pg (~> 1.1)

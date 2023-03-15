@@ -35,7 +35,12 @@ class User < ApplicationRecord
 
   enum preferred_font: {
     default: 0,
-    monospace: 1,
+    system: 1,
+    whitney: 2,
+    sentinel: 3,
+    mercury: 4,
+    chronicle: 5,
+    archer: 6,
   }, _prefix: true
 
   enum preferred_theme: {
